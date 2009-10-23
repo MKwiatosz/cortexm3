@@ -273,90 +273,83 @@ void EXTI4_IRQHandler(void)
 }
 
 /*******************************************************************************
-* Function Name  : DMAChannel1_IRQHandler
-* Description    : This function handles DMA Stream 1 interrupt request.
+* Function Name  : DMA1_Channel1_IRQHandler
+* Description    : This function handles DMA1 Channel 1 interrupt request.
 * Input          : None
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void DMAChannel1_IRQHandler(void)
-{
-}
+void DMA1_Channel1_IRQHandler(void)
+{}
 
 /*******************************************************************************
-* Function Name  : DMAChannel2_IRQHandler
-* Description    : This function handles DMA Stream 2 interrupt request.
+* Function Name  : DMA1_Channel2_IRQHandler
+* Description    : This function handles DMA1 Channel 2 interrupt request.
 * Input          : None
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void DMAChannel2_IRQHandler(void)
-{
-}
+void DMA1_Channel2_IRQHandler(void)
+{}
 
 /*******************************************************************************
-* Function Name  : DMAChannel3_IRQHandler
-* Description    : This function handles DMA Stream 3 interrupt request.
+* Function Name  : DMA1_Channel3_IRQHandler
+* Description    : This function handles DMA1 Channel 3 interrupt request.
 * Input          : None
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void DMAChannel3_IRQHandler(void)
-{
-}
+void DMA1_Channel3_IRQHandler(void)
+{}
 
 /*******************************************************************************
-* Function Name  : DMAChannel4_IRQHandler
-* Description    : This function handles DMA Stream 4 interrupt request.
+* Function Name  : DMA1_Channel4_IRQHandler
+* Description    : This function handles DMA1 Channel 4 interrupt request.
 * Input          : None
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void DMAChannel4_IRQHandler(void)
-{
-}
+void DMA1_Channel4_IRQHandler(void)
+{}
 
 /*******************************************************************************
-* Function Name  : DMAChannel5_IRQHandler
-* Description    : This function handles DMA Stream 5 interrupt request.
+* Function Name  : DMA1_Channel5_IRQHandler
+* Description    : This function handles DMA1 Channel 5 interrupt request.
 * Input          : None
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void DMAChannel5_IRQHandler(void)
-{
-}
+void DMA1_Channel5_IRQHandler(void)
+{}
 
 /*******************************************************************************
-* Function Name  : DMAChannel6_IRQHandler
-* Description    : This function handles DMA Stream 6 interrupt request.
+* Function Name  : DMA1_Channel6_IRQHandler
+* Description    : This function handles DMA1 Channel 6 interrupt request.
 * Input          : None
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void DMAChannel6_IRQHandler(void)
-{
-}
+void DMA1_Channel6_IRQHandler(void)
+{}
 
 /*******************************************************************************
-* Function Name  : DMAChannel7_IRQHandler
-* Description    : This function handles DMA Stream 7 interrupt request.
+* Function Name  : DMA1_Channel7_IRQHandler
+* Description    : This function handles DMA1 Channel 7 interrupt request.
 * Input          : None
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void DMAChannel7_IRQHandler(void)
-{
-}
+void DMA1_Channel7_IRQHandler(void)
+{}
 
 /*******************************************************************************
-* Function Name  : ADC_IRQHandler
+* Function Name  : ADC1_2_IRQHandler
 * Description    : This function handles ADC global interrupt request.
 * Input          : None
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void ADC_IRQHandler(void)
+void ADC1_2_IRQHandler(void)
 {
 }
 
