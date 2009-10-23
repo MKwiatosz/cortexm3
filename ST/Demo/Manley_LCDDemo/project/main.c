@@ -47,9 +47,10 @@ void Led_RW_OFF(void);
 void delay(void);
 void delay()
 {
-int i,j;
-j=0;
-for (i=0; i<0xfffff; i++) j++;
+  int i,j;
+  j=0;
+  for (i=0; i<0xfffff; i++)
+    j++;
 }
 EXTI_InitTypeDef EXTI_InitStructure;
 /*******************************************************************************
@@ -251,13 +252,9 @@ void NVIC_Configuration(void)
 {
   NVIC_InitTypeDef NVIC_InitStructure;
 
-#ifdef  VECT_TAB_RAM
-  /* Set the Vector Table base location at 0x20000000 */
-  NVIC_SetVectorTable(NVIC_VectTab_RAM, 0x0);
-#else  /* VECT_TAB_FLASH  */
+  /* VECT_TAB_FLASH  */
   /* Set the Vector Table base location at 0x08000000 */
   NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x0);
-#endif
 
   /* Configure the Priority Group to 2 bits */
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
