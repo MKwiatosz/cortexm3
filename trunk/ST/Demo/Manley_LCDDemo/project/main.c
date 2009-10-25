@@ -18,12 +18,14 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_lib.h"
 #include "lcd.h"
+#include <stdio.h>
 
 /* Local includes ------------------------------------------------------------*/
 /* Private typedef -----------------------------------------------------------*/
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 
 /* Private define ------------------------------------------------------------*/
+/* Private function prototypes -----------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 vu32 ret; /* for return of the interrupt handling */
@@ -53,6 +55,9 @@ void delay()
     j++;
 }
 EXTI_InitTypeDef EXTI_InitStructure;
+GPIO_InitTypeDef GPIO_InitStructure;
+USART_InitTypeDef USART_InitStructure;
+
 /*******************************************************************************
 * Function Name  : main
 * Description    : Main program
@@ -99,6 +104,33 @@ int main(void)
   EXTI_InitStructure.EXTI_LineCmd = ENABLE;
   EXTI_Init(&EXTI_InitStructure);
 
+  /* Enable GPIOA and USART1 clock */
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_USART1, ENABLE);
+
+  /* Configure USART1 Rx (PA.10) as input floating */
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+  /* Configure USART1 Tx (PA.09) as alternate function push-pull */
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+  USART_InitStructure.USART_BaudRate = 115200;
+  USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+  USART_InitStructure.USART_StopBits = USART_StopBits_1;
+  USART_InitStructure.USART_Parity = USART_Parity_No;
+  USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+  USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+
+  /* Configure the USART1 */
+  USART_Init(USART1, &USART_InitStructure);
+  /* Enable the USARTx */
+  USART_Cmd(USART1, ENABLE);
+
+  printf("-= Manley LCD Demo =-");
   while(1)
   {
       write_string("STM3");  /*STM32 LCD demo*/
@@ -410,4 +442,38 @@ void assert_failed(u8* file, u32 line)
   }
 }
 #endif
+
+/*******************************************************************************
+* Function Name  : PUTCHAR_PROTOTYPE
+* Description    : Retargets the C library printf_1 function to the USART.
+* Input          : None
+* Output         : None
+* Return         : None
+*******************************************************************************/
+/*******************************************************************************
+* Function Name  : PUTCHAR_PROTOTYPE
+* Description    : Retargets the C library printf_1 function to the USART.
+* Input          : None
+* Output         : None
+* Return         : None
+*******************************************************************************/
+int  sendchar(int ch)
+{
+  /* Write a character to the USART */
+  USART_SendData(USART1, (u8) ch);
+
+  /* Loop until the end of transmission */
+  while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
+  {
+  }
+
+  return ch;
+}
+
+int  getkey(void)
+{
+
+  return 0;
+}
+
 /******************* (C) COPYRIGHT 2007 STMicroelectronics *****END OF FILE****/

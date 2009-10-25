@@ -450,6 +450,11 @@
               <FileType>1</FileType>
               <FilePath>..\library\src\stm32f10x_usart.c</FilePath>
             </File>
+            <File>
+              <FileName>Retarget.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>D:\Keil\ARM\Startup\Retarget.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
