@@ -49,9 +49,51 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
+/* Define debug levels */
+#define _DEBUG_LEVEL 2
+#if (_DEBUG_LEVEL == 0)
+#define printf_0 printf
+#define printf_1(pstr, ...) 
+#define printf_2(pstr, ...)
+#define printf_3(pstr, ...)
+#define printf_4(pstr, ...)
+#endif
+
+#if (_DEBUG_LEVEL == 1)
+#define printf_0 printf
+#define printf_1 printf
+#define printf_2(pstr, ...)
+#define printf_3(pstr, ...)
+#define printf_4(pstr, ...)
+#endif
+
+#if (_DEBUG_LEVEL == 2)
+#define printf_0 printf
+#define printf_1 printf
+#define printf_2 printf
+#define printf_3(pstr, ...)
+#define printf_4(pstr, ...)
+#endif
+
+#if (_DEBUG_LEVEL == 3)
+#define printf_0 printf
+#define printf_1 printf
+#define printf_2 printf
+#define printf_3 printf
+#define printf_4(pstr, ...)
+#endif
+
+#if (_DEBUG_LEVEL >= 4)
+#define printf_0 printf
+#define printf_1 printf
+#define printf_2 printf
+#define printf_3 printf
+#define printf_4 printf
+#endif
+
 /* Uncomment the line below to expanse the "assert_param" macro in the 
    Standard Peripheral Library drivers code */
-/* #define USE_FULL_ASSERT    1 */
+#define USE_FULL_ASSERT    1
 
 /* Exported macro ------------------------------------------------------------*/
 #ifdef  USE_FULL_ASSERT
