@@ -49,7 +49,10 @@ typedef struct cmd_s {
 
 /* Exported macro ------------------------------------------------------------*/
 /* External variables --------------------------------------------------------*/
+extern cmd_t basic_cmd_array[];
+
 /* Exported functions ------------------------------------------------------- */
+extern void cmdVersion(char *param);
 extern int  getkey(void);
 extern void cmdHelpInit(void);
 extern void cmdBasicInit(void);

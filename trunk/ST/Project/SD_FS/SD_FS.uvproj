@@ -465,6 +465,11 @@
               <FileType>1</FileType>
               <FilePath>.\Src\cmd_parse.c</FilePath>
             </File>
+            <File>
+              <FileName>cmd_array.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\cmd_array.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
