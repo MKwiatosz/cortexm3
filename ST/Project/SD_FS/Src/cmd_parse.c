@@ -34,7 +34,6 @@ uint32_t ConsoleStartFlg= 0;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 static void consoleVersionGet(uint8_t* major,uint8_t* sub,uint8_t* minor);
-static void cmdVersion(char *param);
 static uint32_t cmdIdxIncrease(uint32_t *pcmdIdx);
 static void cmdFlushCopy(uint32_t cursorPos,char *pcmdBuf,char *pcmdSrc,uint32_t cmdLen);
 static void cmdHelpDisp(char *parameters);
@@ -42,18 +41,6 @@ static void cmdHelpShow(cmd_t *bc,uint32_t maxCmdLen);
 static void cmdProcess(char *cmd,uint32_t repeating);
 
 /* Private variables ---------------------------------------------------------*/
-/***** base command structure *****/
-cmd_t basic_cmd_array[] =
-{
-  {"ver",
-   (cmdHandler)cmdVersion,    
-   "Get the version of some important library. Usage: ver",   
-   NULL
-  },
-
-  { NULL,NULL,NULL,NULL}
-};
-
 /*******************************************************************************
 * Function Name  : consoleVersionGet
 * Description    : Get console version.
@@ -75,13 +62,13 @@ static void consoleVersionGet(uint8_t* major,uint8_t* sub,uint8_t* minor)
 * Output         : None.
 * Return         : None.
 *******************************************************************************/
-static void cmdVersion(char *param)
+void cmdVersion(char *param)
 {
   uint8_t major, sub, minor;
 
-  printf("\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+  printf("\r+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
   consoleVersionGet(&major, &sub, &minor);
-  printf("\r\nconsole: v%d.%d.%d\n",major,sub,minor);
+  printf("\r\nconsole: v%d.%d.%d",major,sub,minor);
   printf("\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 }
 
@@ -156,32 +143,31 @@ static void cmdHelpDisp(char *parameters)
       bc = bc->pnext;
     }
 
-    printf("no help for command `%s' found, try just `help'\n", parameters);
+    printf("\rno help for command `%s' found, try just `help'\n", parameters);
     return;
   }
 
   /* Display base command */
-  printf("\n");
-  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-  printf("+ basic command                                           +\n");
-  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+  printf("\r+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+  printf("\r\n+ basic command                                           +");
+  printf("\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\n");
   while(bc)
   {
     printf("%-18s ", bc->cmd);
     i++;
     if(i == 4)
     {
-      printf("\n");
+      printf("\r\n");
       i = 0;
     }
     bc = bc->pnext;
   }
   if(i != 0) 
   {
-    printf("\n");
+    printf("\r\n");
   }
 
-  printf("\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 }
 
 /*******************************************************************************
@@ -253,7 +239,7 @@ static void cmdHelpShow(cmd_t *bc,uint32_t maxCmdLen)
       }
     }
 
-    printf("\n");
+    printf("\r\n");
 
     help += showThisLine;
     helpLen -= showThisLine;
@@ -354,7 +340,7 @@ static void cmdProcess(char *cmd,uint32_t repeating)
     bc = bc->pnext;
   }
 
-  printf("command `%s' not found, try `help'\n", cmd);
+  printf("\rcommand `%s' not found, try `help'\n", cmd);
 }
 
 /*******************************************************************************
@@ -466,7 +452,7 @@ void cmdMonitor(void)
     if(c == '\r')
     {
       logIn = TRUE;
-      printf("\n\ncmd>");
+      printf("\r\ncmd>");
     }
   }
   else
@@ -485,7 +471,7 @@ void cmdMonitor(void)
 
       case '\r':  
       /* Process the command. */
-      printf("\n");
+      printf("\r\n");
       if(pos)
       {
         /* Do not place the same last command into the history if the same. */  
@@ -510,7 +496,7 @@ void cmdMonitor(void)
         memset(buffer, 0, CMD_BUF_SIZE);
         printf("\n");
       }
-      printf("cmd>");
+      printf("\rcmd>");
       break;
 
       case '[': /* Non ASCII characters, arrow. */
