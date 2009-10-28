@@ -8,6 +8,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "hw_config.h"
+#include <stdio.h>
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -77,12 +78,12 @@ void HardwareConfigure(void)
 *******************************************************************************/
 void PrintSysInfo(void)
 {
-  printf_1("\r\n###############################################");
-  printf_1("\r\n# [SD File System]                            #");
-  printf_1("\r\n#   author: Xu Mingfeng                       #");
-  printf_1("\r\n#   e-mail: developer.cortex@gmail.com        #");
-  printf_1("\r\n#   date  : 2009-10-26                        #");
-  printf_1("\r\n###############################################");
+  printf_1("\r\n###########################################################");
+  printf_1("\r\n# [SD File System]                                        #");
+  printf_1("\r\n#   author: Xu Mingfeng                                   #");
+  printf_1("\r\n#   e-mail: developer.cortex@gmail.com                    #");
+  printf_1("\r\n#   date  : 2009-10-26                                    #");
+  printf_1("\r\n###########################################################");
 }
 
 /******************* (C) COPYRIGHT 2009 developer.cortex *******END OF FILE****/

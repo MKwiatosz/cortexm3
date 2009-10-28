@@ -455,6 +455,16 @@
               <FileType>1</FileType>
               <FilePath>.\Src\Retarget.c</FilePath>
             </File>
+            <File>
+              <FileName>task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\task.c</FilePath>
+            </File>
+            <File>
+              <FileName>cmd_parse.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\cmd_parse.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

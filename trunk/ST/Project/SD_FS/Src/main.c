@@ -12,6 +12,7 @@
 #include "stm32f10x.h"
 #include "hw_config.h"
 #include "task.h"
+#include <stdio.h>
 
 /** @addtogroup Template_Project
   * @{

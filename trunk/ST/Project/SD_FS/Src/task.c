@@ -8,6 +8,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "task.h"
+#include "cmd.h"
+#include <stdio.h>
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -24,13 +26,14 @@
 *******************************************************************************/
 void MainTask(void)
 {
-  char C;
-  
+  /* Init console */
+  cmdHelpInit();
+  cmdBasicInit();
+
+  /* Main task */
   while(1)
   {
-    C = getchar();
-    if(C == '\r')
-      printf("\n");
+    cmdMonitor();
   }
 }
 
