@@ -95,7 +95,13 @@ void PrintSysInfo(void)
   if(SD_Status == MSD_RESPONSE_FAILURE)
     printf_1("\r\nSD sequence failed !");
   else if(SD_Status == MSD_RESPONSE_NO_ERROR)
+  {
+    Get_Medium_Characteristics();
     printf_1("\r\nSD sequence succeed .");
+    printf_1("\r\nMsdBlockCount: 0x%08x",Mass_Block_Count);
+    printf_1("\r\nMsdBlockSize : 0x%08x Byte",Mass_Block_Size);
+    printf_1("\r\nMsdMemorySize: 0x%08x Byte",Mass_Memory_Size);
+  }
 }
 
 /******************* (C) COPYRIGHT 2009 developer.cortex *******END OF FILE****/

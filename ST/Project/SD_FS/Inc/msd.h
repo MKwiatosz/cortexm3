@@ -146,28 +146,33 @@ sMSD_CID;
 /* Exported macro ------------------------------------------------------------*/
 /* External variables --------------------------------------------------------*/
 extern uint16_t SD_Status;
+extern u32 Mass_Block_Count;
+extern u32 Mass_Block_Size;
+extern u32 Mass_Memory_Size;
+extern sMSD_CSD MSD_csd;
 
 /* Exported functions ------------------------------------------------------- */
+extern void Get_Medium_Characteristics(void);
 
 /*----- High layer function -----*/
-uint8_t MSD_Init(void);
-uint8_t MSD_WriteBlock(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
-uint8_t MSD_ReadBlock(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead);
-uint8_t MSD_WriteBuffer(uint8_t* pBuffer, uint32_t WriteAddr, uint32_t NumByteToWrite);
-uint8_t MSD_ReadBuffer(uint8_t* pBuffer, uint32_t ReadAddr, uint32_t NumByteToRead);
-uint8_t MSD_GetCSDRegister(sMSD_CSD* MSD_csd);
-uint8_t MSD_GetCIDRegister(sMSD_CID* MSD_cid);
+extern uint8_t MSD_Init(void);
+extern uint8_t MSD_WriteBlock(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
+extern uint8_t MSD_ReadBlock(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead);
+extern uint8_t MSD_WriteBuffer(uint8_t* pBuffer, uint32_t WriteAddr, uint32_t NumByteToWrite);
+extern uint8_t MSD_ReadBuffer(uint8_t* pBuffer, uint32_t ReadAddr, uint32_t NumByteToRead);
+extern uint8_t MSD_GetCSDRegister(sMSD_CSD* MSD_csd);
+extern uint8_t MSD_GetCIDRegister(sMSD_CID* MSD_cid);
 
 /*----- Medium layer function -----*/
-void MSD_SendCmd(uint8_t Cmd, uint32_t Arg, uint8_t Crc);
-uint8_t MSD_GetResponse(uint8_t Response);
-uint8_t MSD_GetDataResponse(void);
-uint8_t MSD_GoIdleState(void);
-uint16_t MSD_GetStatus(void);
+extern void MSD_SendCmd(uint8_t Cmd, uint32_t Arg, uint8_t Crc);
+extern uint8_t MSD_GetResponse(uint8_t Response);
+extern uint8_t MSD_GetDataResponse(void);
+extern uint8_t MSD_GoIdleState(void);
+extern uint16_t MSD_GetStatus(void);
 
 /*----- Low layer function -----*/
-void MSD_WriteByte(uint8_t byte);
-uint8_t MSD_ReadByte(void);
+extern void MSD_WriteByte(uint8_t byte);
+extern uint8_t MSD_ReadByte(void);
 
 #endif /* __MSD_H */
 
