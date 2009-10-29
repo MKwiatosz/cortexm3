@@ -38,6 +38,10 @@
 #define MSD_CS_HIGH()    GPIO_SetBits(GPIOD, GPIO_Pin_9)
 /* Private variables ---------------------------------------------------------*/
 uint16_t SD_Status;
+u32 Mass_Block_Count;
+u32 Mass_Block_Size;
+u32 Mass_Memory_Size;
+sMSD_CSD MSD_csd;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SPI_Config(void);
@@ -789,6 +793,28 @@ void SPI_Config(void)
 
   /* SPI1 enable */
   SPI_Cmd(SPI1, ENABLE);
+}
+
+/*******************************************************************************
+* Function Name  : Get_Medium_Characteristics.
+* Description    : Get the microSD card size.
+* Input          : None.
+* Output         : None.
+* Return         : None.
+*******************************************************************************/
+void Get_Medium_Characteristics(void)
+{
+  u32 temp1 = 0;
+  u32 temp2 = 0;
+
+  MSD_GetCSDRegister(&MSD_csd);
+
+  temp1 = MSD_csd.DeviceSize + 1;
+  temp2 = 1 << (MSD_csd.DeviceSizeMul + 2);
+
+  Mass_Block_Count = temp1 * temp2;
+  Mass_Block_Size  =  1 << MSD_csd.RdBlockLen;
+  Mass_Memory_Size = (Mass_Block_Count * Mass_Block_Size);
 }
 
 /******************* (C) COPYRIGHT 2008 STMicroelectronics *****END OF FILE****/
