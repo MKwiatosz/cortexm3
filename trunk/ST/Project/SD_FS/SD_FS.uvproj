@@ -430,6 +430,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\SDK\3.1.2\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f10x_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\3.1.2\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -469,6 +474,11 @@
               <FileName>cmd_array.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Src\cmd_array.c</FilePath>
+            </File>
+            <File>
+              <FileName>msd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\msd.c</FilePath>
             </File>
           </Files>
         </Group>
