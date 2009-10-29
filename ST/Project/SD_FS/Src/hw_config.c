@@ -8,6 +8,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "hw_config.h"
+#include "msd.h"
 #include <stdio.h>
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,6 +66,9 @@ void HardwareConfigure(void)
   /* Enable the USARTx */
   USART_Cmd(USART1, ENABLE);
   
+  /* Init SD via SPI */
+  SD_Status = MSD_Init();
+
   /* Print system info */
   PrintSysInfo();
 }
@@ -78,12 +82,20 @@ void HardwareConfigure(void)
 *******************************************************************************/
 void PrintSysInfo(void)
 {
+  /* Print project info */
   printf_1("\r\n###########################################################");
   printf_1("\r\n# [SD File System]                                        #");
   printf_1("\r\n#   author: Xu Mingfeng                                   #");
   printf_1("\r\n#   e-mail: developer.cortex@gmail.com                    #");
   printf_1("\r\n#   date  : 2009-10-26                                    #");
   printf_1("\r\n###########################################################");
+  
+  /* Print SD info */
+  printf_1("\r\nSD_Status: 0x%02x",SD_Status);
+  if(SD_Status == MSD_RESPONSE_FAILURE)
+    printf_1("\r\nSD sequence failed !");
+  else if(SD_Status == MSD_RESPONSE_NO_ERROR)
+    printf_1("\r\nSD sequence succeed .");
 }
 
 /******************* (C) COPYRIGHT 2009 developer.cortex *******END OF FILE****/

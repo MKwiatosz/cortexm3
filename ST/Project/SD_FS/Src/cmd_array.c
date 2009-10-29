@@ -8,6 +8,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "cmd.h"
+#include "task.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -20,6 +21,13 @@ cmd_t basic_cmd_array[] =
     "ver",
     (cmdHandler)cmdVersion,    
     "Get the version of some important library. Usage: ver",   
+    NULL
+  },
+
+  {
+    "rd",
+    (cmdHandler)Read_SD,    
+    "Read 512 bytes for SD. Usage: rd 0x10000",
     NULL
   },
 

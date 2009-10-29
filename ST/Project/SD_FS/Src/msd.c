@@ -8,13 +8,14 @@
 *             ----------------------------------------------
 *             |  STM32F10x    |     MSD          Pin        |
 *             ----------------------------------------------
-*             | P0.4          |   ChipSelect      1         |
-*             | P0.1 / MOSI   |   DataIn          2         |
+*             | PD.10         |   Power                     |
+*             | PD.9          |   ChipSelect      1         |
+*             | PA.7 / MOSI   |   DataIn          2         |
 *             |               |   GND             3 (0 V)   |
 *             |               |   VDD             4 (3.3 V) |
-*             | P0.2 / SCLK   |   Clock           5         |
+*             | PA.5 / SCLK   |   Clock           5         |
 *             |               |   GND             6 (0 V)   |
-*             | P0.0 / MISO   |   DataOut         7         |
+*             | PA.6 / MISO   |   DataOut         7         |
 *             -----------------------------------------------
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -32,9 +33,11 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Select MSD Card: ChipSelect pin low  */
-#define MSD_CS_LOW()     GPIO_ResetBits(GPIOC, GPIO_Pin_12)
+#define MSD_CS_LOW()     GPIO_ResetBits(GPIOD, GPIO_Pin_9)
 /* Deselect MSD Card: ChipSelect pin high */
-#define MSD_CS_HIGH()    GPIO_SetBits(GPIOC, GPIO_Pin_12)
+#define MSD_CS_HIGH()    GPIO_SetBits(GPIOD, GPIO_Pin_9)
+/* Private variables ---------------------------------------------------------*/
+uint16_t SD_Status;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SPI_Config(void);
@@ -54,6 +57,10 @@ uint8_t MSD_Init(void)
 
   /* Initialize SPI1 */
   SPI_Config();
+  /* Delay for power on */
+  i = 0x200000;
+  while(i--);
+
   /* MSD chip select high */
   MSD_CS_HIGH();
   /* Send dummy byte 0xFF, 10 times with CS high*/
@@ -745,7 +752,7 @@ void SPI_Config(void)
   SPI_InitTypeDef   SPI_InitStructure;
 
   /* GPIOA and GPIOC Periph clock enable */
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOC, ENABLE);
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOD, ENABLE);
   /* SPI1 Periph clock enable */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
 
@@ -755,11 +762,18 @@ void SPI_Config(void)
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-  /* Configure PC12 pin: CS pin */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
+  /* Configure PD9 pin: CS pin */
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_Init(GPIOC, &GPIO_InitStructure);
+  GPIO_Init(GPIOD, &GPIO_InitStructure);
+
+  /* Configure PD10 pin: PWR pin */
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+  GPIO_Init(GPIOD, &GPIO_InitStructure);
+  GPIO_SetBits(GPIOD, GPIO_Pin_10); /* GPIO_Pin_10 = Hi,Power On */
 
   /* SPI1 Config */
   SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
