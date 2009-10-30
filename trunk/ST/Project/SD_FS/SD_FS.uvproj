@@ -345,7 +345,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\SDK\3.1.2\Libraries\CMSIS\Core\CM3;..\..\SDK\3.1.2\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Inc</IncludePath>
+              <IncludePath>..\..\SDK\3.1.2\Libraries\CMSIS\Core\CM3;..\..\SDK\3.1.2\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Inc;.\Efsl\base\Inc;.\Efsl\driver\Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -434,6 +434,96 @@
               <FileName>stm32f10x_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\SDK\3.1.2\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>EFSL_Base</GroupName>
+          <Files>
+            <File>
+              <FileName>debug.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\debug.c</FilePath>
+            </File>
+            <File>
+              <FileName>dir.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\dir.c</FilePath>
+            </File>
+            <File>
+              <FileName>disc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\disc.c</FilePath>
+            </File>
+            <File>
+              <FileName>efs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\efs.c</FilePath>
+            </File>
+            <File>
+              <FileName>extract.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\extract.c</FilePath>
+            </File>
+            <File>
+              <FileName>fat.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\fat.c</FilePath>
+            </File>
+            <File>
+              <FileName>file.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\file.c</FilePath>
+            </File>
+            <File>
+              <FileName>fs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\fs.c</FilePath>
+            </File>
+            <File>
+              <FileName>ioman.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\ioman.c</FilePath>
+            </File>
+            <File>
+              <FileName>ls.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\ls.c</FilePath>
+            </File>
+            <File>
+              <FileName>mkfs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\mkfs.c</FilePath>
+            </File>
+            <File>
+              <FileName>partition.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\partition.c</FilePath>
+            </File>
+            <File>
+              <FileName>plibc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\plibc.c</FilePath>
+            </File>
+            <File>
+              <FileName>time.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\time.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\base\Src\ui.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>EFSL_Driver</GroupName>
+          <Files>
+            <File>
+              <FileName>sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\driver\Src\sd.c</FilePath>
             </File>
           </Files>
         </Group>
