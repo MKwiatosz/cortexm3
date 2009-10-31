@@ -144,6 +144,11 @@ sMSD_CID;
 
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
+/* Select MSD Card: ChipSelect pin low  */
+#define MSD_CS_LOW()     GPIO_ResetBits(GPIOD, GPIO_Pin_9)
+/* Deselect MSD Card: ChipSelect pin high */
+#define MSD_CS_HIGH()    GPIO_SetBits(GPIOD, GPIO_Pin_9)
+
 /* External variables --------------------------------------------------------*/
 extern uint16_t SD_Status;
 extern u32 Mass_Block_Count;
@@ -153,6 +158,7 @@ extern sMSD_CSD MSD_csd;
 
 /* Exported functions ------------------------------------------------------- */
 extern void Get_Medium_Characteristics(void);
+extern void SPI_Config(void);
 
 /*----- High layer function -----*/
 extern uint8_t MSD_Init(void);

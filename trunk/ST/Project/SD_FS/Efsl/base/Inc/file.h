@@ -1,5 +1,5 @@
-/*****************************************************************************\
-*              efs - General purpose Embedded Filesystem library              *
+/*****************************************************************************/
+/*              efs - General purpose Embedded Filesystem library              *
 *          --------------------- -----------------------------------          *
 *                                                                             *
 * Filename : file.h                                                           *
@@ -27,8 +27,8 @@
 * on this file might be covered by the GNU General Public License.            *
 *                                                                             *
 *                                                    (c)2006 Lennart Yseboodt *
-*                                                    (c)2006 Michael De Nil   *
-\*****************************************************************************/
+*                                                    (c)2006 Michael De Nil   */
+/*****************************************************************************/
 
 #ifndef __FILE_H_
 #define __FILE_H_
@@ -43,6 +43,7 @@
 #include "debug.h"
 #include "types.h"
 #include "fat.h"
+
 /*****************************************************************************/
 
 #define MODE_READ 0x72

@@ -33,7 +33,7 @@
 \*****************************************************************************/
 
 /*****************************************************************************/
-#include "interfaces/sd.h"
+#include "sd.h"
 /*****************************************************************************/
 
 esint8 sd_Init(hwInterface *iface)
@@ -128,28 +128,28 @@ void sd_Resp8bError(hwInterface *iface,euint8 value)
 	switch(value)
 	{
 		case 0x40:
-			DBG((TXT("Argument out of bounds.\n")));
+			//DBG((TXT("Argument out of bounds.\n")));
 			break;
 		case 0x20:
-			DBG((TXT("Address out of bounds.\n")));
+			//DBG((TXT("Address out of bounds.\n")));
 			break;
 		case 0x10:
-			DBG((TXT("Error during erase sequence.\n")));
+			//DBG((TXT("Error during erase sequence.\n")));
 			break;
 		case 0x08:
-			DBG((TXT("CRC failed.\n")));
+			//DBG((TXT("CRC failed.\n")));
 			break;
 		case 0x04:
-			DBG((TXT("Illegal command.\n")));
+			//DBG((TXT("Illegal command.\n")));
 			break;
 		case 0x02:
-			DBG((TXT("Erase reset (see SanDisk docs p5-13).\n")));
+			//DBG((TXT("Erase reset (see SanDisk docs p5-13).\n")));
 			break;
 		case 0x01:
-			DBG((TXT("Card is initialising.\n")));
+			//DBG((TXT("Card is initialising.\n")));
 			break;
 		default:
-			DBG((TXT("Unknown error 0x%x (see SanDisk docs p5-13).\n"),value));
+			//DBG((TXT("Unknown error 0x%x (see SanDisk docs p5-13).\n"),value));
 			break;
 	}
 }
@@ -166,36 +166,36 @@ esint8 sd_State(hwInterface *iface)
 	{
 		case 0x000:
 			return(1);
-			break;
+			//break;
 		case 0x0001:
-			DBG((TXT("Card is Locked.\n")));
+			//DBG((TXT("Card is Locked.\n")));
 			break;
 		case 0x0002:
-			DBG((TXT("WP Erase Skip, Lock/Unlock Cmd Failed.\n")));
+			//DBG((TXT("WP Erase Skip, Lock/Unlock Cmd Failed.\n")));
 			break;
 		case 0x0004:
-			DBG((TXT("General / Unknown error -- card broken?.\n")));
+			//DBG((TXT("General / Unknown error -- card broken?.\n")));
 			break;
 		case 0x0008:
-			DBG((TXT("Internal card controller error.\n")));
+			//DBG((TXT("Internal card controller error.\n")));
 			break;
 		case 0x0010:
-			DBG((TXT("Card internal ECC was applied, but failed to correct the data.\n")));
+			//DBG((TXT("Card internal ECC was applied, but failed to correct the data.\n")));
 			break;
 		case 0x0020:
-			DBG((TXT("Write protect violation.\n")));
+			//DBG((TXT("Write protect violation.\n")));
 			break;
 		case 0x0040:
-			DBG((TXT("An invalid selection, sectors for erase.\n")));
+			//DBG((TXT("An invalid selection, sectors for erase.\n")));
 			break;
 		case 0x0080:
-			DBG((TXT("Out of Range, CSD_Overwrite.\n")));
+			//DBG((TXT("Out of Range, CSD_Overwrite.\n")));
 			break;
 		default:
 			if(value>0x00FF)
 				sd_Resp8bError(iface,(euint8) (value>>8));
 			else
-				DBG((TXT("Unknown error: 0x%x (see SanDisk docs p5-14).\n"),value));
+				//DBG((TXT("Unknown error: 0x%x (see SanDisk docs p5-14).\n"),value));
 			break;
 	}
 	return(-1);
@@ -312,12 +312,12 @@ esint8 sd_getDriveSize(hwInterface *iface, euint32* drive_size )
 		cardresp = sd_Resp8b(iface);
 	} while ( cardresp != 0xFE );
 
-	DBG((TXT("CSD:")));
+	//DBG((TXT("CSD:")));
 	for( i=0; i<16; i++) {
 		iob[i] = sd_Resp8b(iface);
-		DBG((TXT(" %02x"), iob[i]));
+		//DBG((TXT(" %02x"), iob[i]));
 	}
-	DBG((TXT("\n")));
+	//DBG((TXT("\n")));
 
 	if_spiSend(iface,0xff);
 	if_spiSend(iface,0xff);

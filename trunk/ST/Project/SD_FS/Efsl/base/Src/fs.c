@@ -435,10 +435,10 @@ euint32 fs_getFirstClusterRootDir(FileSystem *fs)
 	switch(fs->type){
 		case FAT32:
 			return(fs->volumeId.RootCluster);
-			break;
+			//break;
 		default:
 				return(1);
-				break;
+				//break;
 	}
 }
 /*****************************************************************************/

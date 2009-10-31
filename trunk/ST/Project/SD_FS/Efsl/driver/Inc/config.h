@@ -1,7 +1,6 @@
-#ifndef __EFSL_CONFIG_H__
+#ifndef __EFSL_CONFIG_H_
 #define __EFSL_CONFIG_H__
 
-/* This is for the LPC2000 SD-Card SPI interface (M. Thomas) */
 
 
 /* Hardware target
@@ -18,11 +17,8 @@
 	/*#define HW_ENDPOINT_ATMEGA128_SD*/
 
 
-	#define HW_ENDPOINT_STM32F10x_SD
-	#define HW_ENDPOINT_STM32F10x_SPINUM  (1)
-
-	/*#define HW_ENDPOINT_DSP_TI6713_SD*/
-
+	
+  #define HW_ENDPOINT_STM32F10X_SD
 
 /* Memory configuration
    --------------------
@@ -34,7 +30,9 @@
  * but it will work for sure.
 */
 
-	/* disabled for ARM (mt): #define BYTE_ALIGNMENT */
+	/* disabled for ARM (mt): */
+	
+	//#define BYTE_ALIGNMENT 
 
 /* Cache configuration
    -------------------
@@ -49,8 +47,8 @@
  * ioman_init.
 */
 	/*#define IOMAN_NUMBUFFER 1*/
-	#define IOMAN_NUMBUFFER 1 /* 32kB RAM on the LPC2138 - let's use 3 kB */
-	#define IOMAN_NUMITERATIONS 3
+	#define IOMAN_NUMBUFFER 1 
+	#define IOMAN_NUMITERATIONS 1
 	#define IOMAN_DO_MEMALLOC
 
 /* Cluster pre-allocation
@@ -70,7 +68,7 @@
 */
       /*#define CLUSTER_PREALLOC_FILE 0*/
 	  #define CLUSTER_PREALLOC_FILE 0
-      #define CLUSTER_PREALLOC_DIRECTORY 0
+        #define CLUSTER_PREALLOC_DIRECTORY 1
 
 
 /* Endianess configuration
@@ -138,7 +136,7 @@
  * and nothing will happen. For real world use debugging should be turned off.
 */
 
-//	#define DEBUG
+	#define DEBUG
 
 
 #endif

@@ -94,7 +94,7 @@ short listFiles(FileSystem *fs, char *dirname)
 	
 		while((file_fread(&dir,offset,512,buf)))
 		{
-			DBG((TXT("Read 512 bytes from dir with offset %li.\n"),offset));
+			//DBG((TXT("Read 512 bytes from dir with offset %li.\n"),offset));
 			for(fileEntryCount=0;fileEntryCount<16;fileEntryCount++)
 			{
 				fileEntry = *(((FileRecord*)buf) + fileEntryCount);
@@ -107,7 +107,7 @@ short listFiles(FileSystem *fs, char *dirname)
 					 (fileEntry.FileName[0]>='0' && fileEntry.FileName[0]<='9')
 					)
 					{
-						DBG((TXT("Filename: %s\n"),fileEntry.FileName));
+						//DBG((TXT("Filename: %s\n"),fileEntry.FileName));
 						counter++;
 					}
 				}
@@ -119,7 +119,7 @@ short listFiles(FileSystem *fs, char *dirname)
 	FUNC_OUT((TXT("")));
 	return(counter);
 	
-	return(-1);
+	//return(-1);
 }
 /*****************************************************************************/
 

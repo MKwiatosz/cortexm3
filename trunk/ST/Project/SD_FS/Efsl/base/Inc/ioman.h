@@ -1,5 +1,5 @@
-/*****************************************************************************\
-*                     libfat - General purpose FAT library                    *
+/*****************************************************************************/
+/*                     libfat - General purpose FAT library                    *
 *                      ----------------------------------                     *
 *                                                                             *
 * Filename : ioman.h                                                          *
@@ -27,8 +27,8 @@
 * on this file might be covered by the GNU General Public License.            *
 *                                                                             *
 *                                                    (c)2006 Lennart Yseboodt *
-*                                                    (c)2006 Michael De Nil   *
-\*****************************************************************************/
+*                                                    (c)2006 Michael De Nil   */
+/*****************************************************************************/
 
 #ifndef __IOMAN_H__
 #define __IOMAN_H__

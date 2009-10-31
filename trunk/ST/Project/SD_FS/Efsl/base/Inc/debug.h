@@ -58,7 +58,7 @@
 		#include <avr/io.h>
 		#include <compat/ina90.h>
 		#include <avr/pgmspace.h>
-		#include <stdio.h>
+		//#include <stdio.h>
 
 		#define TXT(x) PSTR(x)
 		#define DBG(x) debug x
@@ -66,8 +66,22 @@
 		#define FUNC_OUT(x) ;
 	#endif
 
+   #ifdef HW_ENDPOINT_STM32F10X_SD
+		//#include <stdio.h>
+                #include <stdlib.h>
+
+		#define TXT(x) x
+		#define DBG(x) printf x
+		#define FUNC_IN(x) ;
+		#define FUNC_OUT(x) ;
+	#endif
+
+
+
+
+
 	#ifdef HW_ENDPOINT_LINUX_ALL
-		#include <stdio.h>
+		//#include <stdio.h>
 		#include <stdarg.h>
 	
 		#define TXT(x) x
@@ -77,7 +91,7 @@
 	#endif
 
 	#ifdef HW_ENDPOINT_DSP_TI6713_SD
-		#include <stdio.h>
+		//#include <stdio.h>
 		#include <stdarg.h>
 
 		#define TXT(x) x
@@ -86,7 +100,7 @@
 		#define FUNC_OUT(x) ;
 	#endif
 	#ifdef HW_ENDPOINT_NIOS_2_SD
-		#include <stdio.h>
+		//#include <stdio.h>
 		#include <stdarg.h>
 
 		#define TXT(x) x
@@ -102,11 +116,11 @@
 		#define FUNC_OUT(x) ;
 		#define debug debug_printf
 	#else
-	void debug(const eint8 *format, ...); /* This is messy FIXME */
+	void debug(const eint8 *format, ...); 
 	#endif
 
-	void debug_init();
-	void debug_end();
+	//void debug_init();
+	//void debug_end();
 
 	#ifdef HW_ENDPOINT_LINUX_ALL
 	FILE* debugfile;

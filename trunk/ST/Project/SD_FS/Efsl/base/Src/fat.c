@@ -53,7 +53,7 @@ euint32 fat_getSectorAddressFatEntry(FileSystem *fs,euint32 cluster_addr)
 			}else{
 				return(base+res);
 			}
-			break;
+			//break;
 		case FAT16:
 			res=cluster_addr/256;
 			if(res>=fs->FatSectorCount){
@@ -61,7 +61,7 @@ euint32 fat_getSectorAddressFatEntry(FileSystem *fs,euint32 cluster_addr)
 			}else{
 				return(base+res);
 			}
-			break;
+			//break;
 		case FAT32:
 			res=cluster_addr/128;
 			if(res>=fs->FatSectorCount){
@@ -69,7 +69,7 @@ euint32 fat_getSectorAddressFatEntry(FileSystem *fs,euint32 cluster_addr)
 			}else{
 				return(base+res);
 			}
-			break; 
+			//break; 
 	}
 	return(0);
 }
@@ -148,7 +148,7 @@ void fat_setNextClusterAddress(FileSystem *fs,euint32 cluster_addr,euint32 next_
 	sector=fat_getSectorAddressFatEntry(fs,cluster_addr);
 	
 	if(( fs->FatSectorCount <= (sector - fs->volumeId.ReservedSectorCount )||(sector==0))){
-	    DBG((TXT("HARDERROR:::fat_getNextClusterAddress READ PAST FAT BOUNDARY\n")));
+	    //DBG((TXT("HARDERROR:::fat_getNextClusterAddress READ PAST FAT BOUNDARY\n")));
 	    return;
 	}
 	
@@ -241,13 +241,13 @@ euint32 fat_giveEocMarker(FileSystem *fs)
 	{
 		case FAT12:
 			return(0xFFF);
-			break;
+			//break;
 		case FAT16:
 			return(0xFFFF);
-			break;
+			//break;
 		case FAT32:
 			return(0x0FFFFFFF);
-			break;
+			//break;
 	}
 	return(0);
 }

@@ -9,6 +9,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "hw_config.h"
 #include "msd.h"
+#include "efs.h"
+#include "ls.h"
 #include <stdio.h>
 
 /* Private typedef -----------------------------------------------------------*/
@@ -17,6 +19,9 @@
 /* Private variables ---------------------------------------------------------*/
 USART_InitTypeDef USART_InitStructure;
 GPIO_InitTypeDef  GPIO_InitStructure;
+EmbeddedFileSystem  efs;
+EmbeddedFile        file;
+DirList             list;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -65,9 +70,6 @@ void HardwareConfigure(void)
   USART_Init(USART1, &USART_InitStructure);
   /* Enable the USARTx */
   USART_Cmd(USART1, ENABLE);
-  
-  /* Init SD via SPI */
-  SD_Status = MSD_Init();
 
   /* Print system info */
   PrintSysInfo();
@@ -89,7 +91,10 @@ void PrintSysInfo(void)
   printf_1("\r\n#   e-mail: developer.cortex@gmail.com                    #");
   printf_1("\r\n#   date  : 2009-10-26                                    #");
   printf_1("\r\n###########################################################");
-  
+
+#if 0
+  /* Init SD via SPI */
+  SD_Status = MSD_Init();
   /* Print SD info */
   printf_1("\r\nSD_Status: 0x%02x",SD_Status);
   if(SD_Status == MSD_RESPONSE_FAILURE)
@@ -101,6 +106,31 @@ void PrintSysInfo(void)
     printf_1("\r\nMsdBlockCount: 0x%08x",Mass_Block_Count);
     printf_1("\r\nMsdBlockSize : 0x%08x Byte",Mass_Block_Size);
     printf_1("\r\nMsdMemorySize: 0x%08x Byte",Mass_Memory_Size);
+  }
+#endif
+
+  /* Init file system */
+  if(efs_init(&efs,"\\")!=0)
+  {
+    printf_1("\r\nCould not open file system.");
+  }
+  else
+  {
+    printf_1("\r\nOpen file system succeed.");
+    /* Open directory */
+    if(ls_openDir(&list, &(efs.myFs), "/") != 0)
+    {
+      printf_1("\r\nCould not open the selected directory.");
+    }
+    else
+    {
+      printf_1("\r\nOpen the selected directory succeed.");
+      while (ls_getNext(&list) == 0)
+      {
+        printf_1("\r\n%.11s (%li bytes)", list.currentEntry.FileName,
+                                                    list.currentEntry.FileSize);
+      }
+    } 
   }
 }
 
