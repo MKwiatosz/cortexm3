@@ -8,7 +8,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "hw_config.h"
-#include "msd.h"
 #include "efs.h"
 #include "ls.h"
 #include <stdio.h>
@@ -92,46 +91,25 @@ void PrintSysInfo(void)
   printf_1("\r\n#   date  : 2009-10-26                                    #");
   printf_1("\r\n###########################################################");
 
-#if 0
-  /* Init SD via SPI */
-  SD_Status = MSD_Init();
-  /* Print SD info */
-  printf_1("\r\nSD_Status: 0x%02x",SD_Status);
-  if(SD_Status == MSD_RESPONSE_FAILURE)
-    printf_1("\r\nSD sequence failed !");
-  else if(SD_Status == MSD_RESPONSE_NO_ERROR)
-  {
-    Get_Medium_Characteristics();
-    printf_1("\r\nSD sequence succeed .");
-    printf_1("\r\nMsdBlockCount: 0x%08x",Mass_Block_Count);
-    printf_1("\r\nMsdBlockSize : 0x%08x Byte",Mass_Block_Size);
-    printf_1("\r\nMsdMemorySize: 0x%08x Byte",Mass_Memory_Size);
-  }
-#endif
-
   /* Init file system */
   if(efs_init(&efs,"\\")!=0)
   {
     printf_1("\r\nCould not open file system.");
+    return;
   }
-  else
+
+  printf_1("\r\nOpen file system succeed.");
+  /* Open directory */
+  if(ls_openDir(&list, &(efs.myFs), "/") != 0)
   {
-    printf_1("\r\nOpen file system succeed.");
-    /* Open directory */
-    if(ls_openDir(&list, &(efs.myFs), "/") != 0)
-    {
-      printf_1("\r\nCould not open the selected directory.");
-    }
-    else
-    {
-      printf_1("\r\nOpen the selected directory succeed.");
-      while (ls_getNext(&list) == 0)
-      {
-        printf_1("\r\n%.11s (%li bytes)", list.currentEntry.FileName,
-                                                    list.currentEntry.FileSize);
-      }
-    } 
+    printf_1("\r\nCould not open the selected directory.");
+    return;
   }
+  printf_1("\r\nOpen the selected directory succeed.");
+  /* Display all files */
+  while (ls_getNext(&list) == 0)
+    printf_1("\r\n%.11s (%li bytes)", list.currentEntry.FileName,
+                                      list.currentEntry.FileSize);
 }
 
 /******************* (C) COPYRIGHT 2009 developer.cortex *******END OF FILE****/

@@ -18,8 +18,6 @@
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* External variables --------------------------------------------------------*/
-extern uint8_t SD_Buffer[512];
-
 /* Exported functions ------------------------------------------------------- */
 extern void MainTask(void);
 extern void Read_SD(char *param);
