@@ -83,6 +83,8 @@ void HardwareConfigure(void)
 *******************************************************************************/
 void PrintSysInfo(void)
 {
+  uint32_t size;
+
   /* Print project info */
   printf_1("\r\n###########################################################");
   printf_1("\r\n# [SD File System]                                        #");
@@ -98,18 +100,27 @@ void PrintSysInfo(void)
     return;
   }
 
+  /* Printf file system info */
   printf_1("\r\nOpen file system succeed.");
-  /* Open directory */
-  if(ls_openDir(&list, &(efs.myFs), "/") != 0)
+  printf_1("\r\nFile system: ");
+  switch(efs.myFs.type)
   {
-    printf_1("\r\nCould not open the selected directory.");
-    return;
+    case FAT12:
+      printf_1("Fat12");
+      break;
+    case FAT16:
+      printf_1("Fat16");
+      break;
+    case FAT32:
+      printf_1("Fat32");
+      break;
+    default:
+      printf_1("Unkown");
+      break;
   }
-  printf_1("\r\nOpen the selected directory succeed.");
-  /* Display all files */
-  while (ls_getNext(&list) == 0)
-    printf_1("\r\n%.11s (%li bytes)", list.currentEntry.FileName,
-                                      list.currentEntry.FileSize);
+  /* Disk space */
+  size = (efs.myFs.SectorCount)*(efs.myFs.volumeId.BytesPerSector);
+  printf_1("\r\nDisk space: %04d MB",size>>20);
 }
 
 /******************* (C) COPYRIGHT 2009 developer.cortex *******END OF FILE****/
