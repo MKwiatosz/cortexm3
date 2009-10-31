@@ -114,7 +114,7 @@
             <Oh166RecLen>16</Oh166RecLen>
           </OPTHX>
           <Simulator>
-            <UseSimulator>1</UseSimulator>
+            <UseSimulator>0</UseSimulator>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
             <RunToMain>1</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
@@ -125,7 +125,7 @@
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
           </Simulator>
           <Target>
-            <UseTarget>0</UseTarget>
+            <UseTarget>1</UseTarget>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
             <RunToMain>0</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
@@ -135,7 +135,7 @@
             <RestoreToolbox>1</RestoreToolbox>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>5</TargetSelection>
+          <TargetSelection>7</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -441,11 +441,6 @@
           <GroupName>EFSL_Base</GroupName>
           <Files>
             <File>
-              <FileName>debug.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Efsl\base\Src\debug.c</FilePath>
-            </File>
-            <File>
               <FileName>dir.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Efsl\base\Src\dir.c</FilePath>
@@ -524,6 +519,11 @@
               <FileName>sd.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Efsl\driver\Src\sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>efsl_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Efsl\driver\Src\efsl_spi.c</FilePath>
             </File>
           </Files>
         </Group>

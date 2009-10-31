@@ -44,10 +44,14 @@
 	#include "interfaces/atmega128.h"
 #elif defined(HW_ENDPOINT_DSP_TI6713_SD)
 	#include "interfaces/dsp67xx.h"
+
 #elif defined(HW_ENDPOINT_LPC2000_SD)
 	#include "interfaces/lpc2000_spi.h"
-#elif defined(HW_ENDPOINT_STM32F10x_SD)
-  #include "msd.h"
+
+#elif defined(HW_ENDPOINT_STM32F10X_SD)
+	#include "efsl_spi.h"
+
+
 #else
 	#error "NO INTERFACE DEFINED - see interface.h"
 #endif

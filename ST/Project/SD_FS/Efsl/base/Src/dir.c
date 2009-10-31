@@ -1,5 +1,6 @@
-/*****************************************************************************\
-*              efs - General purpose Embedded Filesystem library              *
+
+/*****************************************************************************/
+/*              efs - General purpose Embedded Filesystem library              *
 *          --------------------- -----------------------------------          *
 *                                                                             *
 * Filename : dir.c                                                            *
@@ -28,8 +29,8 @@
 * on this file might be covered by the GNU General Public License.            *
 *                                                                             *
 *                                                    (c)2006 Lennart Yseboodt *
-*                                                    (c)2006 Michael De Nil   *
-\*****************************************************************************/
+*                                                    (c)2006 Michael De Nil   */
+/*****************************************************************************/
 
 /*****************************************************************************/
 #include "dir.h"
@@ -216,15 +217,15 @@ euint32  dir_findinBuf(euint8 *buf, eint8 *fatname, FileLocation *loc, euint8 mo
 	switch(mode){
 		case DIRFIND_FILE:
 			return(dir_findFileinBuf(buf,fatname,loc));
-			break;
+			//break;
 		case DIRFIND_FREE:
 			return(dir_findFreeEntryinBuf(buf,loc));
-			break;
+			//break;
 		default:
 			return(0);
-			break;
+			//break;
 	}
-	return(0);
+	//return(0);
 }
 /*****************************************************************************/
 

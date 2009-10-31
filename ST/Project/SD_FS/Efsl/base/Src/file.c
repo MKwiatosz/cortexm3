@@ -244,7 +244,7 @@ esint8 file_fopen(File* file,FileSystem *fs,eint8* filename,eint8 mode)
                 return(0);
             }
             return(-1);
-            break;
+            //break;
         case MODE_WRITE:
             if(fs_findFile(fs,filename,&loc,&sec)) /* File may NOT exist, but parent HAS to exist */
 			{
@@ -272,7 +272,7 @@ esint8 file_fopen(File* file,FileSystem *fs,eint8* filename,eint8 mode)
 			{
                 return(-3);
 			}
-            break;
+            //break;
         case MODE_APPEND:
 			if(fs_findFile(fs,filename,&loc,0)==1) /* File exists */
 			{
@@ -311,12 +311,12 @@ esint8 file_fopen(File* file,FileSystem *fs,eint8* filename,eint8 mode)
 				}
 			}
 			return(0);
-            break;
+            //break;
         default:
             return(-4);
-            break;
+          //  break;
     }
-    return(-5);
+    //return(-5);
 }
 /*****************************************************************************/
 

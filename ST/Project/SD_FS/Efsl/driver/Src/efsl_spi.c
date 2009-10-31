@@ -1,5 +1,5 @@
 /******************** (C) COPYRIGHT 2009 developer.cortex **********************
-* File Name          : template.c
+* File Name          : efsl_spi.c
 * Author             : Xu Mingfeng
 * Version            : V1.0.0
 * Date               : 2009-10-28
@@ -7,6 +7,11 @@
 *******************************************************************************/
 
 /* Includes ------------------------------------------------------------------*/
+#include "efsl_spi.h"
+#include "sd.h"
+#include "stm32f10x_spi.h"
+#include "msd.h"
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -20,8 +25,6 @@
 * Output         :
 * Return         :
 *******************************************************************************/
-/*****************************************************************************/ 
-
 esint8 if_readBuf(hwInterface* file,euint32 address,euint8* buf)
 {
 	return(sd_readSector(file,address,buf,512));
@@ -51,9 +54,9 @@ static euint8 my_if_spiSend(hwInterface *iface, euint8 outgoing)
 {
 	euint8 incoming;
 
-	SPI_SendData(SPI1, outgoing);
-	while (SPI_GetFlagStatus(SPI1, SPI_FLAG_TXE) == RESET);
-	incoming = SPI_ReceiveData(SPI1);
+	SPI_I2S_SendData(SPI1, outgoing);
+	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
+	incoming = SPI_I2S_ReceiveData(SPI1);
 
 	return(incoming);
 }
@@ -97,9 +100,9 @@ euint8 if_spiSend(hwInterface *iface, euint8 outgoing)
 
 
 	MSD_CS_LOW();
-	SPI_SendData(SPI1, outgoing);
-	while (SPI_GetFlagStatus(SPI1, SPI_FLAG_TXE) == RESET);
-	incoming = SPI_ReceiveData(SPI1);
+	SPI_I2S_SendData(SPI1, outgoing);
+	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
+	incoming = SPI_I2S_ReceiveData(SPI1);
 	MSD_CS_HIGH();
 	
 

@@ -1,10 +1,10 @@
-/*****************************************************************************/
-/*              efs - General purpose Embedded Filesystem library              *
-*          --------------------- -----------------------------------          *
+/*****************************************************************************\
+*              efs - General purpose Embedded Filesystem library              *
+*          ---------------------------------------------------------          *
 *                                                                             *
-* Filename : disc.c                                                           *
-* Description : This file contains the functions regarding the whole disc     *
-*               such as loading the MBR and performing read/write tests.      *
+* Filename :  sd.h                                                            *
+* Revision :  Initial developement                                            *
+* Description : Headerfile for sd.c                                           *
 *                                                                             *
 * This program is free software; you can redistribute it and/or               *
 * modify it under the terms of the GNU General Public License                 *
@@ -28,41 +28,43 @@
 * on this file might be covered by the GNU General Public License.            *
 *                                                                             *
 *                                                    (c)2006 Lennart Yseboodt *
-*                                                    (c)2006 Michael De Nil   */
-/*****************************************************************************/
+*                                                    (c)2006 Michael De Nil   *
+\*****************************************************************************/
 
-/*****************************************************************************/
-#include "disc.h"
-/*****************************************************************************/
+#ifndef __SD_H_ 
+#define __SD_H_ 
 
-/* ****************************************************************************  
- * void disc_initDisc(Disc *disc,hcInterface* source)
- * Description: This initialises the disc by loading the MBR and setting the
- * pointer to the hardware object.
-*/
-void disc_initDisc(Disc *disc,IOManager* ioman)
-{
-	disc->ioman=ioman;
-	disc_setError(disc,DISC_NOERROR);
-	disc_loadMBR(disc);
-}
-/*****************************************************************************/ 
+#include "config.h"
+#include "types.h"
+#include "debug.h"
 
-/* ****************************************************************************  
- * void disc_loadMBR(Disc *disc)
- * Description: This functions copies the partitiontable to the partitions field.
-*/
-void disc_loadMBR(Disc *disc)
-{
-	euint8 x;
-	euint8 *buf;
-	
-	buf=ioman_getSector(disc->ioman,LBA_ADDR_MBR,IOM_MODE_READONLY|IOM_MODE_EXP_REQ);
-	for(x=0;x<4;x++){
-		ex_getPartitionField(buf,&(disc->partitions[x]),PARTITION_TABLE_OFFSET+(x*SIZE_PARTITION_FIELD));
-	}
-	ioman_releaseSector(disc->ioman,buf);
-}
-/*****************************************************************************/ 
+#ifdef HW_ENDPOINT_ATMEGA128_SD
+	#include "interfaces/atmega128.h"
+#endif
+#ifdef HW_ENDPOINT_DSP_TI6713_SD
+	#include "interfaces/dsp67xx.h"
+#endif
+#ifdef HW_ENDPOINT_LPC2000_SD
+	#include "interfaces/lpc2000_spi.h"
+#endif
 
+#ifdef HW_ENDPOINT_STM32F10X_SD
+	#include "efsl_spi.h"
+#endif
 
+#define	CMDREAD		17
+#define	CMDWRITE	24
+#define	CMDREADCSD       9
+
+esint8  sd_Init(hwInterface *iface);
+void sd_Command(hwInterface *iface,euint8 cmd, euint16 paramx, euint16 paramy);
+euint8 sd_Resp8b(hwInterface *iface);
+void sd_Resp8bError(hwInterface *iface,euint8 value);
+euint16 sd_Resp16b(hwInterface *iface);
+esint8 sd_State(hwInterface *iface);
+
+esint8 sd_readSector(hwInterface *iface,euint32 address,euint8* buf, euint16 len);
+esint8 sd_writeSector(hwInterface *iface,euint32 address, euint8* buf);
+esint8 sd_getDriveSize(hwInterface *iface, euint32* drive_size );
+
+#endif

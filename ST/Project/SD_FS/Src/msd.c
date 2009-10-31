@@ -32,10 +32,6 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
-/* Select MSD Card: ChipSelect pin low  */
-#define MSD_CS_LOW()     GPIO_ResetBits(GPIOD, GPIO_Pin_9)
-/* Deselect MSD Card: ChipSelect pin high */
-#define MSD_CS_HIGH()    GPIO_SetBits(GPIOD, GPIO_Pin_9)
 /* Private variables ---------------------------------------------------------*/
 uint16_t SD_Status;
 u32 Mass_Block_Count;
@@ -44,7 +40,6 @@ u32 Mass_Memory_Size;
 sMSD_CSD MSD_csd;
 
 /* Private function prototypes -----------------------------------------------*/
-static void SPI_Config(void);
 /* Private functions ---------------------------------------------------------*/
 
 /*******************************************************************************
@@ -774,7 +769,7 @@ void SPI_Config(void)
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_Init(GPIOD, &GPIO_InitStructure);
-  GPIO_SetBits(GPIOD, GPIO_Pin_10); /* GPIO_Pin_10 = Hi,Power On */
+  GPIO_ResetBits(GPIOD, GPIO_Pin_10); /* GPIO_Pin_10 = Hi,Power On */
 
   /* SPI1 Config */
   SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;

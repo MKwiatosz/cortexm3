@@ -1,5 +1,5 @@
-/*****************************************************************************\
-*              efs - General purpose Embedded Filesystem library              *
+/*****************************************************************************/
+/*              efs - General purpose Embedded Filesystem library              *
 *          --------------------- -----------------------------------          *
 *                                                                             *
 * Filename : efs.h                                                            *
@@ -27,8 +27,8 @@
 * on this file might be covered by the GNU General Public License.            *
 *                                                                             *
 *                                                    (c)2006 Lennart Yseboodt *
-*                                                    (c)2006 Michael De Nil   *
-\*****************************************************************************/
+*                                                    (c)2006 Michael De Nil   */
+/*****************************************************************************/
 
 #ifndef __EFS_H__
 #define __EFS_H__
