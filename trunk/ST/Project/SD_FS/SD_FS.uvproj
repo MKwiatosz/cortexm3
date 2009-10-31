@@ -565,11 +565,6 @@
               <FileType>1</FileType>
               <FilePath>.\Src\cmd_array.c</FilePath>
             </File>
-            <File>
-              <FileName>msd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Src\msd.c</FilePath>
-            </File>
           </Files>
         </Group>
       </Groups>
