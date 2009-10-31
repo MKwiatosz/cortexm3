@@ -25,9 +25,16 @@ cmd_t basic_cmd_array[] =
   },
 
   {
-    "rd",
-    (cmdHandler)Read_SD,    
-    "Read 512 bytes for SD. Usage: rd 0x10000",
+    "dir",
+    (cmdHandler)Dir_SD,    
+    "Command dir for SD. Usage: dir",
+    NULL
+  },
+
+  {
+    "type",
+    (cmdHandler)Type_SD,    
+    "Command type for SD. Usage: type FAT.c",
     NULL
   },
 
