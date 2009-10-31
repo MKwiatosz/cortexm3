@@ -20,7 +20,8 @@
 /* External variables --------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 extern void MainTask(void);
-extern void Read_SD(char *param);
+extern void Dir_SD(char *param);
+extern void Type_SD(char *param);
 
 #endif /* __TASK_H */
 /******************* (C) COPYRIGHT 2009 developer.cortex *******END OF FILE****/

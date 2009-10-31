@@ -13,6 +13,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
+#include "efs.h"
+#include "ls.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
@@ -20,6 +22,9 @@
 /* External variables --------------------------------------------------------*/
 extern USART_InitTypeDef USART_InitStructure;
 extern GPIO_InitTypeDef  GPIO_InitStructure;
+extern EmbeddedFileSystem  efs;
+extern EmbeddedFile        file;
+extern DirList             list;
 
 /* Exported functions ------------------------------------------------------- */
 extern void HardwareConfigure(void);

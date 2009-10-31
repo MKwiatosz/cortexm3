@@ -8,8 +8,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "hw_config.h"
-#include "efs.h"
-#include "ls.h"
 #include <stdio.h>
 
 /* Private typedef -----------------------------------------------------------*/
