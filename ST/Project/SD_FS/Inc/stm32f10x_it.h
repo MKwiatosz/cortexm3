@@ -32,8 +32,10 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */
+/* External variables --------------------------------------------------------*/
+extern uint32_t SysTick_1ms;
 
+/* Exported functions ------------------------------------------------------- */
 void NMI_Handler(void);
 void HardFault_Handler(void);
 void MemManage_Handler(void);

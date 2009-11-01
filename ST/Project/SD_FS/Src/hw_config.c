@@ -68,6 +68,13 @@ void HardwareConfigure(void)
   /* Enable the USARTx */
   USART_Cmd(USART1, ENABLE);
 
+  /* Setup SysTick Timer for 1 sec interrupts  */
+  if(SysTick_Config(SystemFrequency / 1000))
+  { 
+    printf_1("\r\nCapture error.");
+    while (1);
+  }
+
   /* Print system info */
   PrintSysInfo();
 }

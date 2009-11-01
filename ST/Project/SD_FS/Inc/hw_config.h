@@ -15,6 +15,7 @@
 #include "stm32f10x.h"
 #include "efs.h"
 #include "ls.h"
+#include "stm32f10x_it.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

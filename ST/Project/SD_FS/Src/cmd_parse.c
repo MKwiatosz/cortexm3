@@ -153,7 +153,7 @@ static void cmdHelpDisp(char *parameters)
   printf("\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\n");
   while(bc)
   {
-    printf("%-18s ", bc->cmd);
+    printf("%-11s ", bc->cmd);
     i++;
     if(i == 4)
     {
