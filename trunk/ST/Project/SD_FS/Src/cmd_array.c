@@ -38,6 +38,13 @@ cmd_t basic_cmd_array[] =
     NULL
   },
 
+  {
+    "speed",
+    (cmdHandler)Speed_SD,    
+    "test speed for SD file. Usage: speed test.bin",
+    NULL
+  },
+
   { NULL,NULL,NULL,NULL}
 };
 

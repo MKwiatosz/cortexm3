@@ -106,21 +106,34 @@ void if_spiInit(hwInterface *iface)
 
 	SPI_Config();
 	MSD_CS_HIGH();
-	
-	// low speed during init
-	if_spiSetSpeed(3); 
 
 	/* Send 20 spi commands with card not selected */
 	for(i=0;i<21;i++)
 		my_if_spiSend(iface,0xff);
+		
+  /* Speed up */
+	if_spiSetSpeed(SPI_BaudRatePrescaler_2); 
 }
 
 /*****************************************************************************/
 void if_spiSetSpeed(euint8 speed)
 {
-	/*speed &= 0xFE;
-	if ( speed < SPI_PRESCALE_MIN  ) speed = SPI_PRESCALE_MIN ;
-	SPI_PRESCALE_REG = speed;*/
+  SPI_InitTypeDef   SPI_InitStructure;
+
+  /* SPI1 Config */
+  SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+  SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
+  SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
+  SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;
+  SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;
+  SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+  SPI_InitStructure.SPI_BaudRatePrescaler = speed;
+  SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
+  SPI_InitStructure.SPI_CRCPolynomial = 7;
+  SPI_Init(SPI1, &SPI_InitStructure);
+
+  /* SPI1 enable */
+  SPI_Cmd(SPI1, ENABLE);
 }
 
 /*****************************************************************************/

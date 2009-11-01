@@ -75,7 +75,7 @@ void Type_SD(char *param)
 
   if(file_fopen(&file_r,&efs.myFs,param,'r')!=0)
   {
-    printf("\r\nOpen file %s failt.",param);
+    printf("\r\nOpen file %s fail.",param);
     return;
   }
   
@@ -99,9 +99,62 @@ void Type_SD(char *param)
     /* read and printf */
     file_read(&file_r,l,(uint8_t*)buf);
     for(i=0;i<l;i++)
-      printf("%c",buf[i]);
+      printf_1("%c",buf[i]);
   }
   printf_1("\r\n-= data end =-");
+	file_fclose(&file_r);
+}
+
+/*******************************************************************************
+* Function Name  : Speed_SD
+* Description    : Test speed for SD.
+* Input          : None.
+* Output         : None.
+* Return         : None.
+*******************************************************************************/
+void Speed_SD(char *param)
+{
+  uint32_t l,size,Total,rd_timer_from;
+  EmbeddedFile file_r;
+	char buf[512];
+
+  if(file_fopen(&file_r,&efs.myFs,param,'r')!=0)
+  {
+    printf("\r\nOpen file %s fail.",param);
+    return;
+  }
+  
+  /* Display the file */
+  size = file_r.FileSize;
+  Total = size;
+  printf_1("\r\nFile size: %d bytes",size);
+
+  /* Get the current time */
+  printf_1("\r\nReading...");
+  rd_timer_from = 0;
+  SysTick_1ms = 0;
+  while(size)
+  {
+    if(size > 512)
+    {
+      l = 512;
+      size = size - 512;
+    }
+    else
+    {
+      l = size;
+      size = 0;
+    }
+
+    /* read and printf */
+    file_read(&file_r,l,(uint8_t*)buf);
+  }
+  
+  rd_timer_from = SysTick_1ms - rd_timer_from;
+  if(rd_timer_from)
+    printf_1("\r\nSpeed: %dKB/S Time: %dms",Total/rd_timer_from,rd_timer_from);
+  else
+    printf_1("\r\nTime < 1ms.");
 	file_fclose(&file_r);
 }
 
