@@ -287,9 +287,11 @@ esint8 sd_readSector(hwInterface *iface,euint32 address, euint8* buf, euint16 le
 	MSD_CS_LOW();
 	for(i=0;i<len;i++)
 	{
-	  SPI_I2S_SendData(SPI1, 0xff);
+	  // SPI_I2S_SendData(SPI1, 0xff);
+	  SPI1->DR = 0xff;
 	  while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
-	  buf[i] = SPI_I2S_ReceiveData(SPI1);
+	  // buf[i] = SPI_I2S_ReceiveData(SPI1);
+	  buf[i] = SPI1->DR;
   }
   MSD_CS_HIGH();
   
