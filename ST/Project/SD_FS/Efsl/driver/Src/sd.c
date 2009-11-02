@@ -34,6 +34,8 @@
 
 /*****************************************************************************/
 #include "sd.h"
+#include "stm32f10x_spi.h"
+
 /*****************************************************************************/
 
 esint8 sd_Init(hwInterface *iface)
@@ -261,7 +263,6 @@ esint8 sd_readSector(hwInterface *iface,euint32 address, euint8* buf, euint16 le
 {
 	euint8 cardresp;
 	euint8 firstblock;
-	euint8 c;
 	euint16 fb_timeout=0xffff;
 	euint32 i;
 	euint32 place;
@@ -282,12 +283,16 @@ esint8 sd_readSector(hwInterface *iface,euint32 address, euint8* buf, euint16 le
 		return(-1);
 	}
 	
-	for(i=0;i<512;i++){
-		c = if_spiSend(iface,0xff);
-		if(i<len)
-			buf[i] = c;
-	}
-
+	/* Modify by xu,2009-11-02 */
+	MSD_CS_LOW();
+	for(i=0;i<len;i++)
+	{
+	  SPI_I2S_SendData(SPI1, 0xff);
+	  while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
+	  buf[i] = SPI_I2S_ReceiveData(SPI1);
+  }
+  MSD_CS_HIGH();
+  
 	/* Checksum (2 byte) - ignore for now */
 	if_spiSend(iface,0xff);
 	if_spiSend(iface,0xff);
