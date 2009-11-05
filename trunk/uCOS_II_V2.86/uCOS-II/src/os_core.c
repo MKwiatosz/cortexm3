@@ -480,7 +480,7 @@ INT16U  OSEventPendMulti (OS_EVENT **pevents_pend, OS_EVENT **pevents_rdy, void 
              }
 			 break;
 
-        case OS_STAT_PEND_TO:
+        case OS_STAT_PEND_TO:                           /* If events timed out, ...                    */
         default:                                        /* ... remove task from events' wait lists     */
              OS_EventTaskRemoveMulti(OSTCBCur, pevents_pend);
              break;
@@ -590,7 +590,7 @@ void  OSInit (void)
     OSDebugInit();
 #endif
 }
-/*$PAGE*/
+/*$PAGE*/
 /*
 *********************************************************************************************************
 *                                              ENTER ISR
@@ -1776,7 +1776,7 @@ void  OS_TaskIdle (void *p_arg)
         OSTaskIdleHook();                        /* Call user definable HOOK                           */
     }
 }
-/*$PAGE*/
+/*$PAGE*/
 /*
 *********************************************************************************************************
 *                                            STATISTICS TASK
