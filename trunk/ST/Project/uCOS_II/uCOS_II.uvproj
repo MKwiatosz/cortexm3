@@ -345,7 +345,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\SDK\Core\inc;..\..\SDK\Libraries\inc;.\inc</IncludePath>
+              <IncludePath>..\..\SDK\Core\inc;..\..\SDK\Libraries\inc;..\..\..\uCOS_II_V2.86\uCOS-II\inc;..\..\SDK\uC_Port\ini;..\..\SDK\uC_CPU\inc;..\..\SDK\uC_LIB\inc;.\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -403,12 +403,147 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Library</GroupName>
+          <Files>
+            <File>
+              <FileName>misc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\Libraries\src\misc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\Libraries\src\stm32f10x_rcc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>uCOS_II</GroupName>
+          <Files>
+            <File>
+              <FileName>os_tmr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\uCOS_II_V2.86\uCOS-II\src\os_tmr.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\uCOS_II_V2.86\uCOS-II\src\os_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_flag.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\uCOS_II_V2.86\uCOS-II\src\os_flag.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_mbox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\uCOS_II_V2.86\uCOS-II\src\os_mbox.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_mem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\uCOS_II_V2.86\uCOS-II\src\os_mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_mutex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\uCOS_II_V2.86\uCOS-II\src\os_mutex.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_q.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\uCOS_II_V2.86\uCOS-II\src\os_q.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_sem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\uCOS_II_V2.86\uCOS-II\src\os_sem.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\uCOS_II_V2.86\uCOS-II\src\os_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_time.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\uCOS_II_V2.86\uCOS-II\src\os_time.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>uC_Port</GroupName>
+          <Files>
+            <File>
+              <FileName>os_dbg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\uC_Port\src\os_dbg.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_cpu_c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\uC_Port\src\os_cpu_c.c</FilePath>
+            </File>
+            <File>
+              <FileName>os_cpu_a.asm</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\SDK\uC_Port\src\os_cpu_a.asm</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>uC_CPU</GroupName>
+          <Files>
+            <File>
+              <FileName>cpu_c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\uC_CPU\src\cpu_c.c</FilePath>
+            </File>
+            <File>
+              <FileName>cpu_a.asm</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\SDK\uC_CPU\src\cpu_a.asm</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>uC_Lib</GroupName>
+          <Files>
+            <File>
+              <FileName>lib_str.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\uC_LIB\src\lib_str.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_mem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\uC_LIB\src\lib_mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_mem_a.asm</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\SDK\uC_LIB\src\lib_mem_a.asm</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Apllication Code</GroupName>
           <Files>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\app.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\bsp.c</FilePath>
             </File>
           </Files>
         </Group>
