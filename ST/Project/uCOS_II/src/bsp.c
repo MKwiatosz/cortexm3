@@ -149,6 +149,28 @@ static  void  BSP_PB_Init      (void);
 
 void  BSP_Init (void)
 {
+    RCC_DeInit();
+    RCC_HSEConfig(RCC_HSE_ON);
+    RCC_WaitForHSEStartUp();
+
+    RCC_HCLKConfig(RCC_SYSCLK_Div1);
+    RCC_PCLK2Config(RCC_HCLK_Div1);
+    RCC_PCLK1Config(RCC_HCLK_Div2);
+    RCC_ADCCLKConfig(RCC_PCLK2_Div6);
+    //FLASH_SetLatency(FLASH_Latency_2);
+    //FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
+    RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_9);
+    RCC_PLLCmd(ENABLE);
+
+    while (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET) {
+        ;
+    }
+
+    RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
+
+    while (RCC_GetSYSCLKSource() != 0x08) {
+        ;
+    }
 }
 
 /*
@@ -236,6 +258,7 @@ INT32U  OS_CPU_SysTickClkFreq (void)
 
 static  void  BSP_ADC_Init (void)
 {
+
 }
 
 

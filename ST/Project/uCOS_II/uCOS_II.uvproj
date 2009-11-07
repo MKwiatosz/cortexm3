@@ -425,6 +425,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\SDK\Libraries\src\stm32f10x_gpio.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f10x_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\Libraries\src\stm32f10x_adc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

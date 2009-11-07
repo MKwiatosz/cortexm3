@@ -131,6 +131,45 @@ static  void  App_ProbeCallback    (void);
 static  void  App_FormatDec        (CPU_INT08U  *pstr,
                                     CPU_INT32U   value,
                                     CPU_INT08U   digits);
+
+/*******************************************************************************
+* Function Name  : OS_Init_Config
+* Description    : Config for OS init.
+* Input          : None.
+* Output         : None.
+* Return         : None.
+*******************************************************************************/
+void OS_Init_Config(void)
+{
+  CPU_INT08U  os_err;
+
+  BSP_IntDisAll();             /* Disable all ints until we are ready to accept them.  */
+  OSInit();                    /* Initialize "uC/OS-II, The Real-Time Kernel".         */
+
+  os_err = OSTaskCreateExt((void (*)(void *)) App_TaskStart,  /* Create the start task.                               */
+                           (void          * ) 0,
+                           (OS_STK        * )&App_TaskStartStk[APP_TASK_START_STK_SIZE - 1],
+                           (INT8U           ) APP_TASK_START_PRIO,
+                           (INT16U          ) APP_TASK_START_PRIO,
+                           (OS_STK        * )&App_TaskStartStk[0],
+                           (INT32U          ) APP_TASK_START_STK_SIZE,
+                           (void          * )0,
+                           (INT16U          )(OS_TASK_OPT_STK_CLR | OS_TASK_OPT_STK_CHK));
+
+  /* Check the task create */
+  if(os_err == OS_ERR_NONE)
+    printf("\nOSTaskCreateExt: OS_ERR_NONE");
+  else
+    printf("\nOSTaskCreateExt: %d,ERROR",os_err);
+
+#if (OS_TASK_NAME_SIZE >= 11)
+    OSTaskNameSet(APP_TASK_START_PRIO, (CPU_INT08U *)"Start Task", &os_err);
+#endif
+
+  printf("\nuCOS-II start ...");
+  OSStart();                   /* Start multitasking (i.e. give control to uC/OS-II).  */
+}
+
 /*
 *********************************************************************************************************
 *                                          App_TaskStart()
@@ -149,61 +188,35 @@ static  void  App_FormatDec        (CPU_INT08U  *pstr,
 
 static  void  App_TaskStart (void *p_arg)
 {
-    CPU_INT32U  i;
-    CPU_INT32U  j;
-    CPU_INT32U  dly;
+  (void)p_arg;
 
-
-    (void)p_arg;
-
-    BSP_Init();                                                 /* Initialize BSP functions.                            */
-    OS_CPU_SysTickInit();                                       /* Initialize the SysTick.                              */
+  BSP_Init();                  /* Initialize BSP functions.                            */
+  OS_CPU_SysTickInit();        /* Initialize the SysTick.                              */
 
 #if (OS_TASK_STAT_EN > 0)
-    OSStatInit();                                               /* Determine CPU capacity.                              */
+  OSStatInit();                /* Determine CPU capacity.                              */
 #endif
 
 #if ((APP_PROBE_COM_EN == DEF_ENABLED) || \
      (APP_OS_PROBE_EN  == DEF_ENABLED))
-    App_InitProbe();
+  App_InitProbe();
 #endif
 
-    App_EventCreate();                                          /* Create application events.                           */
-    App_TaskCreate();                                           /* Create application tasks.                            */
+  App_EventCreate();           /* Create application events.                           */
+  App_TaskCreate();            /* Create application tasks.                            */
 
-    while (DEF_TRUE) {                                          /* Task body, always written as an infinite loop.       */
-        for (j = 0; j < 4; j++) {
-            for (i = 1; i <= 4; i++) {
-                BSP_LED_On(i);
-                dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
-                OSTimeDlyHMSM(0, 0, 0, dly);
-                BSP_LED_Off(i);
-                dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
-                OSTimeDlyHMSM(0, 0, 0, dly);
-            }
-
-            for (i = 3; i >= 2; i--) {
-                BSP_LED_On(i);
-                dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
-                OSTimeDlyHMSM(0, 0, 0, dly);
-                BSP_LED_Off(i);
-                dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
-                OSTimeDlyHMSM(0, 0, 0, dly);
-            }
-        }
-
-        for (i = 0; i < 4; i++) {
-            BSP_LED_On(0);
-            dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
-            OSTimeDlyHMSM(0, 0, 0, dly * 3);
-            BSP_LED_Off(0);
-            dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
-            OSTimeDlyHMSM(0, 0, 0, dly * 3);
-        }
-    }
+  while (DEF_TRUE)             /* Task body, always written as an infinite loop.       */
+  {
+    OSTimeDlyHMSM(0, 0, 0, 1000);
+    printf("\b\b\b   ");
+    OSTimeDlyHMSM(0, 0, 0, 1000);
+    printf("\b\b\b.  ");
+    OSTimeDlyHMSM(0, 0, 0, 1000);
+    printf("\b\b\b.. ");
+    OSTimeDlyHMSM(0, 0, 0, 1000);
+    printf("\b\b\b...");
+  }
 }
-
-
 
 /*
 *********************************************************************************************************

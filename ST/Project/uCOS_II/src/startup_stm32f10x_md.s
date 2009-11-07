@@ -71,8 +71,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     SVC_Handler               ; SVCall Handler
                 DCD     DebugMon_Handler          ; Debug Monitor Handler
                 DCD     0                         ; Reserved
-                DCD     PendSV_Handler            ; PendSV Handler
-                DCD     SysTick_Handler           ; SysTick Handler
+                DCD     OS_CPU_PendSVHandler      ; 14, PendSV Handler
+                DCD     OS_CPU_SysTickHandler     ; 15, uC/OS-II Tick ISR Handler
 
                 ; External Interrupts
                 DCD     WWDG_IRQHandler           ; Window Watchdog
@@ -167,12 +167,12 @@ DebugMon_Handler\
                 EXPORT  DebugMon_Handler           [WEAK]
                 B       .
                 ENDP
-PendSV_Handler  PROC
-                EXPORT  PendSV_Handler             [WEAK]
+OS_CPU_PendSVHandler  PROC
+                EXPORT  OS_CPU_PendSVHandler       [WEAK]
                 B       .
                 ENDP
-SysTick_Handler PROC
-                EXPORT  SysTick_Handler            [WEAK]
+OS_CPU_SysTickHandler PROC
+                EXPORT  OS_CPU_SysTickHandler      [WEAK]
                 B       .
                 ENDP
 

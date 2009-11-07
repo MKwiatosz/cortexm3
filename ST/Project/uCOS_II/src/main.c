@@ -35,6 +35,9 @@ int main(void)
   /* Configure hardware */
   HardwareConfigure();
 
+  /* Configure OS init and start */
+  OS_Init_Config();
+
   /* Never run to here ! */
   printf("\nMake sure all task done !");
   while(1){};
