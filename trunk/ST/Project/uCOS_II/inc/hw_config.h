@@ -26,6 +26,7 @@ extern GPIO_InitTypeDef  GPIO_InitStructure;
 extern void HardwareConfigure(void);
 extern void PrintSysInfo(void);
 extern void UART_Printf_Config(void);
+extern void OS_Init_Config(void);
 
 #endif /* __HW_CONFIG_H */
 /******************* (C) COPYRIGHT 2009 developer.cortex *******END OF FILE****/
