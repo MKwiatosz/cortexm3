@@ -75,17 +75,6 @@ static  OS_STK         App_TaskKbdStk[APP_TASK_KBD_STK_SIZE];
 
 static  OS_EVENT      *App_UserIFMbox;
 
-static  CPU_CHAR       App_LCDLine0[21];
-static  CPU_CHAR       App_LCDLine1[21];
-static  CPU_CHAR       App_LCDLine2[21];
-static  CPU_CHAR       App_LCDLine3[21];
-static  CPU_CHAR       App_LCDLine4[21];
-static  CPU_CHAR       App_LCDLine5[21];
-static  CPU_CHAR       App_LCDLine6[21];
-static  CPU_CHAR       App_LCDLine7[21];
-static  CPU_CHAR       App_LCDLine8[21];
-static  CPU_CHAR       App_LCDLine9[21];
-
 #if ((APP_OS_PROBE_EN   == DEF_ENABLED) && \
      (APP_PROBE_COM_EN  == DEF_ENABLED) && \
      (PROBE_COM_STAT_EN == DEF_ENABLED))
