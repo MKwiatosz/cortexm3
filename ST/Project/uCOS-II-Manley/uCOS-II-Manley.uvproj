@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>uCOS_II</TargetName>
+      <TargetName>uCOS-II-Manley</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
@@ -33,8 +33,8 @@
           <BinPath></BinPath>
           <IncludePath></IncludePath>
           <LibPath></LibPath>
-          <RegisterFilePath>ST\STM32F10x\</RegisterFilePath>
-          <DBRegisterFilePath>ST\STM32F10x\</DBRegisterFilePath>
+          <RegisterFilePath>ST\STM32F10x\</RegisterFilePath>
+          <DBRegisterFilePath>ST\STM32F10x\</DBRegisterFilePath>
           <TargetStatus>
             <Error>0</Error>
             <ExitCodeStop>0</ExitCodeStop>
@@ -42,14 +42,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\out\</OutputDirectory>
-          <OutputName>uCOS_II</OutputName>
+          <OutputDirectory>.\output\</OutputDirectory>
+          <OutputName>STM3210B-EVAL-OS-Probe</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
-          <BrowseInformation>0</BrowseInformation>
-          <ListingPath>.\out\</ListingPath>
+          <BrowseInformation>1</BrowseInformation>
+          <ListingPath>.\rvmdk\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -114,7 +114,7 @@
             <Oh166RecLen>16</Oh166RecLen>
           </OPTHX>
           <Simulator>
-            <UseSimulator>1</UseSimulator>
+            <UseSimulator>0</UseSimulator>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
             <RunToMain>1</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
@@ -125,7 +125,7 @@
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
           </Simulator>
           <Target>
-            <UseTarget>0</UseTarget>
+            <UseTarget>1</UseTarget>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
             <RunToMain>0</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
@@ -135,7 +135,7 @@
             <RestoreToolbox>1</RestoreToolbox>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>0</TargetSelection>
+          <TargetSelection>7</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -149,7 +149,7 @@
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
             <InitializationFile></InitializationFile>
-            <Driver>BIN\UL2CM3.DLL</Driver>
+            <Driver>Segger\JL2CM3.dll</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -159,9 +159,9 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>0</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4096</DriverSelection>
+            <DriverSelection>4098</DriverSelection>
           </Flash1>
-          <Flash2>BIN\UL2CM3.DLL</Flash2>
+          <Flash2>Segger\JL2CM3.dll</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
         </Utilities>
@@ -179,7 +179,7 @@
             <ldmm>1</ldmm>
             <ldXref>1</ldXref>
             <BigEnd>0</BigEnd>
-            <AdsALst>1</AdsALst>
+            <AdsALst>0</AdsALst>
             <AdsACrf>1</AdsACrf>
             <AdsANop>0</AdsANop>
             <AdsANot>0</AdsANot>
@@ -207,11 +207,11 @@
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>0</useUlib>
+            <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <RoSelD>3</RoSelD>
-            <RwSelD>5</RwSelD>
+            <RwSelD>3</RwSelD>
             <CodeSel>0</CodeSel>
             <OptFeed>0</OptFeed>
             <NoZi1>0</NoZi1>
@@ -329,8 +329,8 @@
             <RvctStartVector></RvctStartVector>
           </ArmAdsMisc>
           <Cads>
-            <interw>1</interw>
-            <Optim>1</Optim>
+            <interw>0</interw>
+            <Optim>2</Optim>
             <oTime>1</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -345,7 +345,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\SDK\Core\inc;..\..\SDK\Libraries\inc;..\..\..\uCOS_II_V2.86\uCOS-II\inc;..\..\SDK\uC_Port\ini;..\..\SDK\uC_CPU\inc;..\..\SDK\uC_LIB\inc;.\inc</IncludePath>
+              <IncludePath>.\APP\inc;.\BSP\inc;..\..\SDK\Core\inc;..\..\SDK\Libraries\inc;..\..\SDK\uC_CPU\inc;..\..\..\uCOS_II_V2.86\uCOS-II\inc;..\..\SDK\uC_Port\ini;..\..\SDK\uC_LIB\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -364,18 +364,18 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>1</umfTarg>
+            <umfTarg>0</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
             <RepFail>1</RepFail>
             <useFile>0</useFile>
-            <TextAddressRange></TextAddressRange>
-            <DataAddressRange></DataAddressRange>
-            <ScatterFile>uCOS_II.sct</ScatterFile>
+            <TextAddressRange>0x00000000</TextAddressRange>
+            <DataAddressRange>0x20000000</DataAddressRange>
+            <ScatterFile>.\STM32_Flash.scat</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
-            <Misc></Misc>
+            <Misc>--entry ResetHndlr</Misc>
             <LinkerInputFile></LinkerInputFile>
             <DisabledWarnings></DisabledWarnings>
           </LDads>
@@ -383,13 +383,53 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>CM3 Core</GroupName>
+          <GroupName>APP</GroupName>
           <Files>
             <File>
-              <FileName>startup_stm32f10x_md.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\src\startup_stm32f10x_md.s</FilePath>
+              <FileName>app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\src\app.c</FilePath>
             </File>
+            <File>
+              <FileName>vectors.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\APP\src\vectors.s</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BSP</GroupName>
+          <Files>
+            <File>
+              <FileName>bsp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BSP\src\bsp.c</FilePath>
+            </File>
+            <File>
+              <FileName>init.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\BSP\src\init.s</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_periph.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BSP\src\bsp_periph.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_int.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BSP\src\bsp_int.c</FilePath>
+            </File>
+            <File>
+              <FileName>LCD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BSP\src\LCD.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CM3 Core</GroupName>
+          <Files>
             <File>
               <FileName>system_stm32f10x.c</FileName>
               <FileType>1</FileType>
@@ -403,18 +443,8 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Library</GroupName>
+          <GroupName>Libraries</GroupName>
           <Files>
-            <File>
-              <FileName>misc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\SDK\Libraries\src\misc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f10x_rcc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\SDK\Libraries\src\stm32f10x_rcc.c</FilePath>
-            </File>
             <File>
               <FileName>stm32f10x_usart.c</FileName>
               <FileType>1</FileType>
@@ -426,14 +456,69 @@
               <FilePath>..\..\SDK\Libraries\src\stm32f10x_gpio.c</FilePath>
             </File>
             <File>
+              <FileName>stm32f10x_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\Libraries\src\stm32f10x_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\Libraries\src\stm32f10x_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\Libraries\src\stm32f10x_rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\Libraries\src\stm32f10x_rcc.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32f10x_adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\SDK\Libraries\src\stm32f10x_adc.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f10x_bkp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\Libraries\src\stm32f10x_bkp.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\Libraries\src\stm32f10x_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\Libraries\src\stm32f10x_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>misc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\Libraries\src\misc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>uCOS_II</GroupName>
+          <GroupName>uC-CPU</GroupName>
+          <Files>
+            <File>
+              <FileName>cpu_a.asm</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\SDK\uC_CPU\src\cpu_a.asm</FilePath>
+            </File>
+            <File>
+              <FileName>cpu_c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\uC_CPU\src\cpu_c.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>uC-OS-II/Source</GroupName>
           <Files>
             <File>
               <FileName>os_tmr.c</FileName>
@@ -488,12 +573,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>uC_Port</GroupName>
+          <GroupName>uC-OS-II/Port</GroupName>
           <Files>
             <File>
-              <FileName>os_dbg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\SDK\uC_Port\src\os_dbg.c</FilePath>
+              <FileName>os_cpu_a.asm</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\SDK\uC_Port\src\os_cpu_a.asm</FilePath>
             </File>
             <File>
               <FileName>os_cpu_c.c</FileName>
@@ -501,30 +586,20 @@
               <FilePath>..\..\SDK\uC_Port\src\os_cpu_c.c</FilePath>
             </File>
             <File>
-              <FileName>os_cpu_a.asm</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\..\SDK\uC_Port\src\os_cpu_a.asm</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>uC_CPU</GroupName>
-          <Files>
-            <File>
-              <FileName>cpu_c.c</FileName>
+              <FileName>os_dbg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\SDK\uC_CPU\src\cpu_c.c</FilePath>
-            </File>
-            <File>
-              <FileName>cpu_a.asm</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\..\SDK\uC_CPU\src\cpu_a.asm</FilePath>
+              <FilePath>..\..\SDK\uC_Port\src\os_dbg.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>uC_Lib</GroupName>
+          <GroupName>uC-LIB</GroupName>
           <Files>
+            <File>
+              <FileName>lib_mem_a.asm</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\SDK\uC_LIB\src\lib_mem_a.asm</FilePath>
+            </File>
             <File>
               <FileName>lib_str.c</FileName>
               <FileType>1</FileType>
@@ -534,46 +609,6 @@
               <FileName>lib_mem.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\SDK\uC_LIB\src\lib_mem.c</FilePath>
-            </File>
-            <File>
-              <FileName>lib_mem_a.asm</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\..\SDK\uC_LIB\src\lib_mem_a.asm</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Apllication Code</GroupName>
-          <Files>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\app.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\bsp.c</FilePath>
-            </File>
-            <File>
-              <FileName>Retarget.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Retarget.c</FilePath>
-            </File>
-            <File>
-              <FileName>hw_config.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\hw_config.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f10x_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\stm32f10x_it.c</FilePath>
             </File>
           </Files>
         </Group>
