@@ -43,24 +43,9 @@
 #include  <lib_str.h>
 
 #include  <stm32f10x_conf.h>
-#include  <stm32f10x.h>
+//#include  <stm32f10x_lib.h>
 
 #include  <app_cfg.h>
 #include  <bsp.h>
-
-/*
-#if (APP_OS_PROBE_EN == DEF_ENABLED)
-#include  <os_probe.h>
-#endif
-
-#if (APP_PROBE_COM_EN == DEF_ENABLED)
-#include  <probe_com.h>
-
-#if (PROBE_COM_METHOD_RS232 == DEF_ENABLED)
-#include  <probe_rs232.h>
-#endif
-#endif
- */
-
 
 #endif

@@ -18,11 +18,11 @@
 *
 *                                     ST Microelectronics STM32
 *                                              with the
-*                                   STM3210B-EVAL Evaluation Board
+*                                   STM3210B-LK1 Evaluation Board
 *
 * Filename      : bsp.h
 * Version       : V1.10
-* Programmer(s) : BAN
+* Programmer(s) : BH3NVN
 *********************************************************************************************************
 */
 
@@ -62,16 +62,13 @@
 #include    <lib_str.h>
 
 #include    <stm32f10x_conf.h>
-#include    <stm32f10x.h>
+//#include    <stm32f10x_lib.h>
 
 #include    <app_cfg.h>
 #include    <bsp.h>
 
 #include  <ucos_ii.h>
 
-#if (APP_OS_PROBE_EN == DEF_ENABLED)
-#include    <os_probe.h>
-#endif
 
 /*
 *********************************************************************************************************
@@ -79,16 +76,16 @@
 *********************************************************************************************************
 */
 
-#define  BSP_JOYSTICK_NONE                       DEF_BIT_NONE
-#define  BSP_JOYSTICK_UP                         DEF_BIT_00
-#define  BSP_JOYSTICK_DOWN                       DEF_BIT_01
-#define  BSP_JOYSTICK_LEFT                       DEF_BIT_02
-#define  BSP_JOYSTICK_RIGHT                      DEF_BIT_03
-#define  BSP_JOYSTICK_CENTER                     DEF_BIT_04
+#define  BSP_JOYSTICK_NONE                       0
+#define  BSP_JOYSTICK_UP                         1
+#define  BSP_JOYSTICK_DOWN                       2
+#define  BSP_JOYSTICK_LEFT                       3
+#define  BSP_JOYSTICK_RIGHT                      4
+#define  BSP_JOYSTICK_CENTER                     5
 
-#define  BSP_PB_ID_KEY                                     1
-#define  BSP_PB_ID_WAKEUP                                  2
-#define  BSP_PB_ID_TAMPER                                  3
+#define  BSP_PB_ID_KEY1                                     1
+#define  BSP_PB_ID_KEY2                                     2
+
 
 /*
 *********************************************************************************************************

@@ -18,11 +18,11 @@
 *
 *                                     ST Microelectronics STM32
 *                                              with the
-*                                   STM3210B-EVAL Evaluation Board
+*                                   STM3210B-LK1 Evaluation Board
 *
 * Filename      : app_cfg.h
 * Version       : V1.10
-* Programmer(s) : BAN
+* Programmer(s) : BH3NVN
 *********************************************************************************************************
 */
 
@@ -35,8 +35,6 @@
 *********************************************************************************************************
 */
 
-#define  APP_OS_PROBE_EN                         _DEF_ENABLED
-#define  APP_PROBE_COM_EN                        _DEF_ENABLED
 
 /*
 *********************************************************************************************************
@@ -51,13 +49,12 @@
 *********************************************************************************************************
 */
 
-#define  APP_TASK_START_PRIO                               3
+#define  APP_TASK_START_PRIO                               2
+#define  APP_TASK_LCD_PRIO                                 5
 #define  APP_TASK_KBD_PRIO                                 4
+#define  APP_TASK_Joystick_PRIO                            3
 
-#define  APP_TASK_USER_IF_PRIO                            12
 
-#define  OS_PROBE_TASK_PRIO              (OS_LOWEST_PRIO - 3)
-#define  OS_TASK_TMR_PRIO                (OS_LOWEST_PRIO - 2)
 
 /*
 *********************************************************************************************************
@@ -67,11 +64,9 @@
 */
 
 #define  APP_TASK_START_STK_SIZE                         128
+#define  APP_TASK_LCD_STK_SIZE                           128
 #define  APP_TASK_KBD_STK_SIZE                           128
-
-#define  APP_TASK_USER_IF_STK_SIZE                       256
-
-#define  OS_PROBE_TASK_STK_SIZE                          128
+#define  APP_TASK_Joystick_STK_SIZE                      128
 
 /*
 *********************************************************************************************************
@@ -81,20 +76,5 @@
 
 #define  uC_CFG_OPTIMIZE_ASM_EN                 DEF_ENABLED
 #define  LIB_STR_CFG_FP_EN                      DEF_DISABLED
-
-/*
-*********************************************************************************************************
-*                                                 PROBE
-*********************************************************************************************************
-*/
-
-#define  OS_PROBE_TASK                                     1    /* Task will be created for uC/Probe OS Plug-In.        */
-#define  OS_PROBE_TMR_32_BITS                              0    /* uC/Probe OS Plugin timer is a 16-bit timer.          */
-#define  OS_PROBE_TIMER_SEL                                2    /* Select timer 2.                                      */
-#define  OS_PROBE_HOOKS_EN                                 1    /* Hooks to update OS_TCB profiling members included.   */
-#define  OS_PROBE_USE_FP                                   1
-
-
-
 
 #endif
