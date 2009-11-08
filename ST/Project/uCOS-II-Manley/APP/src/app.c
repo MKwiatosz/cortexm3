@@ -86,36 +86,31 @@ static  void  App_TaskJoystick     (void *p_arg);
 
 int  main (void)
 {
-    CPU_INT08U  os_err;
+  CPU_INT08U  os_err;
 
-    BSP_IntDisAll();                                            /* Disable all ints until we are ready to accept them.  */
-
-    OSInit();                                                   /* Initialize "uC/OS-II, The Real-Time Kernel".         */
-
-	BSP_Init();                                                 /* Initialize BSP functions.  */
-
+  BSP_IntDisAll();             /* Disable all ints until we are ready to accept them.  */
+  OSInit();                    /* Initialize "uC/OS-II, The Real-Time Kernel".         */
+	BSP_Init();                  /* Initialize BSP functions.  */
 	lcdWrStr("uCOS");
-	
 	App_DispScr_SignOn ();
-    
-	                             
-	printf("OS Init OK£¡\r\n");
-    os_err = OSTaskCreate((void (*)(void *)) App_TaskStart,  /* Create the start task.                               */
-                          (void          * ) 0,
-                          (OS_STK        * )&App_TaskStartStk[APP_TASK_START_STK_SIZE - 1],
-                          (INT8U           ) APP_TASK_START_PRIO
-                         );
-	printf("Creat App_TaskStart£¡\r\n");
+       
+	printf("\r\nOS Init OK!");
+  os_err = OSTaskCreate((void (*)(void *)) App_TaskStart,  /* Create the start task.                               */
+                       (void          * ) 0,
+                       (OS_STK        * )&App_TaskStartStk[APP_TASK_START_STK_SIZE - 1],
+                       (INT8U           ) APP_TASK_START_PRIO
+                       );
+	printf("\r\nCreat App_TaskStart!");
 #if (OS_TASK_NAME_SIZE >= 11)
-    OSTaskNameSet(APP_TASK_START_PRIO, (CPU_INT08U *)"Start Task", &os_err);
+  OSTaskNameSet(APP_TASK_START_PRIO, (CPU_INT08U *)"Start Task", &os_err);
 #endif
 
-	InfoSem = OSSemCreate(0); 
+  InfoSem = OSSemCreate(0); 
 	Disp_Box = OSMboxCreate((void*)0);               
 	OSTimeSet(0);
-    OSStart();                                                  /* Start multitasking (i.e. give control to uC/OS-II).  */
+  OSStart();                   /* Start multitasking (i.e. give control to uC/OS-II).  */
 
-    return (0);
+  return (0);
 }
 
 /*
@@ -136,51 +131,56 @@ int  main (void)
 
 static  void  App_TaskStart (void *p_arg)
 {
-    CPU_INT32U  i;
-    CPU_INT32U  j;
-    CPU_INT32U  dly;
+  CPU_INT32U  i;
+  CPU_INT32U  j;
+  CPU_INT32U  dly;
+  
+  
+  (void)p_arg;
 
-
-    (void)p_arg;
-
-	OS_CPU_SysTickInit();                                       /* Initialize the SysTick. 		*/
+	OS_CPU_SysTickInit();        /* Initialize the SysTick. 		*/
 
 #if (OS_TASK_STAT_EN > 0)
-    OSStatInit();                                               /* Determine CPU capacity.                              */
+  OSStatInit();                /* Determine CPU capacity.                              */
 #endif
 
 	App_TaskCreate();
 
-    while (DEF_TRUE) {                                          /* Task body, always written as an infinite loop.       */
-		for (j = 0; j < 4; j++) {
-            for (i = 1; i <= 4; i++) {
-                BSP_LED_On(i);
-                dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
-                OSTimeDlyHMSM(0, 0, 0, dly);
-                BSP_LED_Off(i);
-                dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
-                OSTimeDlyHMSM(0, 0, 0, dly);
-            }
-
-            for (i = 3; i >= 2; i--) {
-                BSP_LED_On(i);
-                dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
-                OSTimeDlyHMSM(0, 0, 0, dly);
-                BSP_LED_Off(i);
-                dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
-                OSTimeDlyHMSM(0, 0, 0, dly);
-            }
-        }
-
-        for (i = 0; i < 4; i++) {
-            BSP_LED_On(0);
-            dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
-            OSTimeDlyHMSM(0, 0, 0, dly * 3);
-            BSP_LED_Off(0);
-            dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
-            OSTimeDlyHMSM(0, 0, 0, dly * 3);
-        }
+  while (DEF_TRUE)             /* Task body, always written as an infinite loop.       */
+  {           
+    for (j = 0; j < 4; j++) 
+    {
+      for (i = 1; i <= 4; i++) 
+      {
+        BSP_LED_On(i);
+        dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
+        OSTimeDlyHMSM(0, 0, 0, dly);
+        BSP_LED_Off(i);
+        dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
+        OSTimeDlyHMSM(0, 0, 0, dly);
+      }
+    
+      for (i = 3; i >= 2; i--) 
+      {
+        BSP_LED_On(i);
+        dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
+        OSTimeDlyHMSM(0, 0, 0, dly);
+        BSP_LED_Off(i);
+        dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
+        OSTimeDlyHMSM(0, 0, 0, dly);
+      }
     }
+    
+    for (i = 0; i < 4; i++)
+    {
+      BSP_LED_On(0);
+      dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
+      OSTimeDlyHMSM(0, 0, 0, dly * 3);
+      BSP_LED_Off(0);
+      dly = (BSP_ADC_GetStatus(1) >> 4) + 2;
+      OSTimeDlyHMSM(0, 0, 0, dly * 3);
+    }
+  }
 }
 
 /*
@@ -201,39 +201,39 @@ static  void  App_TaskStart (void *p_arg)
 
 static  void  App_TaskCreate (void)
 {
-    CPU_INT08U  os_err;
+  CPU_INT08U  os_err;
 
 	os_err = OSTaskCreate((void (*)(void *)) App_TaskLCD,
-                          (void          * ) 0,
-                          (OS_STK        * )&App_TaskLCDStk[APP_TASK_LCD_STK_SIZE - 1],
-                          (INT8U           ) APP_TASK_LCD_PRIO
-                         );
-	printf("Creat App_TaskLCD£¡\r\n");
+                        (void          * ) 0,
+                        (OS_STK        * )&App_TaskLCDStk[APP_TASK_LCD_STK_SIZE - 1],
+                        (INT8U           ) APP_TASK_LCD_PRIO
+                        );
+	printf("\r\nCreat App_TaskLCD!");
 #if (OS_TASK_NAME_SIZE >= 9)
-    OSTaskNameSet(APP_TASK_LCD_PRIO, "LCD", &os_err);
+  OSTaskNameSet(APP_TASK_LCD_PRIO, "LCD", &os_err);
 #endif
 
-    os_err = OSTaskCreate((void (*)(void *)) App_TaskKbd,
-                          (void          * ) 0,
-                          (OS_STK        * )&App_TaskKbdStk[APP_TASK_KBD_STK_SIZE - 1],
-                          (INT8U           ) APP_TASK_KBD_PRIO
-                          );
-	printf("Creat App_TaskKbd£¡\r\n");
+  os_err = OSTaskCreate((void (*)(void *)) App_TaskKbd,
+                        (void          * ) 0,
+                        (OS_STK        * )&App_TaskKbdStk[APP_TASK_KBD_STK_SIZE - 1],
+                        (INT8U           ) APP_TASK_KBD_PRIO
+                        );
+	printf("\r\nCreat App_TaskKbd!");
 #if (OS_TASK_NAME_SIZE >= 9)
-    OSTaskNameSet(APP_TASK_KBD_PRIO, "KeyBoard", &os_err);
+  OSTaskNameSet(APP_TASK_KBD_PRIO, "KeyBoard", &os_err);
 #endif
 
 	os_err = OSTaskCreate((void (*)(void *)) App_TaskJoystick,
-                          (void          * ) 0,
-                          (OS_STK        * )&App_TaskJoystickStk[APP_TASK_Joystick_STK_SIZE - 1],
-                          (INT8U           ) APP_TASK_Joystick_PRIO
-                          );
-	printf("Creat App_TaskJoystick£¡\r\n");
+                        (void          * ) 0,
+                        (OS_STK        * )&App_TaskJoystickStk[APP_TASK_Joystick_STK_SIZE - 1],
+                        (INT8U           ) APP_TASK_Joystick_PRIO
+                        );
+	printf("\r\nCreat App_TaskJoystick!");
 #if (OS_TASK_NAME_SIZE >= 9)
-    OSTaskNameSet(APP_TASK_Joystick_PRIO, "Joystick", &os_err);
+  OSTaskNameSet(APP_TASK_Joystick_PRIO, "Joystick", &os_err);
 #endif
-
 }
+
 /*
 *********************************************************************************************************
 *                                            App_TaskLCD()
@@ -255,50 +255,60 @@ static  void  App_TaskLCD (void *p_arg)
 	char buf[10];
 	INT8U err;
 	INT8U dsp=0;;
-    (void)p_arg;
-  
+  (void)p_arg;
+
+  OSTimeDlyHMSM(0, 0, 2, 0);
 	lcdClr();
 
-    while (DEF_TRUE) {
-	  dp=OSMboxPend(Disp_Box,10,&err);
-	  if (err == OS_NO_ERR) {
-            dsp = (CPU_INT32U)dp;
-        }
-	  switch (dsp){
-	  case 1:{
-	  		  sprintf(buf,"V%ld",OSVersion());
-			  lcdWrStr(buf);
-			  break;
-	  		 }
-	  case 2:{
-	  		  sprintf(buf,"%4d",OSCPUUsage);
-			  lcdWrStr(buf);
-			  break;
-	  		 }
-	  case 3:{
-	  		  sprintf(buf,"%ldM",BSP_CPU_ClkFreq() / 1000000L);
-			  lcdWrStr(buf);
-			  break;
-	  		 }
-	  case 4:{
-	  		  sprintf(buf,"%4d",OS_TICKS_PER_SEC);
-			  lcdWrStr(buf);
-			  break;
-	  		 }
-	  case 5:{
-	  		  lcdWrStr("uCOS");
-			  break;
-	  		 }
-	  case 0:
-	  default:{
-              sprintf(buf, "%4d", OSTimeGet()/100);         // convert value to a string
-              lcdWrStr(buf);                                // write value to LCD  
-              break;
-			  }
-		}
-	  
-	  OSTimeDlyHMSM(0, 0, 0, 10);	  
+  while (DEF_TRUE) 
+  {
+    dp=OSMboxPend(Disp_Box,10,&err);
+    if (err == OS_NO_ERR) 
+    {
+      dsp = (CPU_INT32U)dp;
     }
+    switch (dsp)
+    {
+      case 1:
+      {
+    		sprintf(buf,"V%ld",OSVersion());
+    	  lcdWrStr(buf);
+    	  break;
+    	}
+      case 2:
+      {
+    		sprintf(buf,"%4d",OSCPUUsage);
+    	  lcdWrStr(buf);
+    	  break;
+    	}
+      case 3:
+      {
+    		sprintf(buf,"%ldM",BSP_CPU_ClkFreq() / 1000000L);
+    	  lcdWrStr(buf);
+    	  break;
+    	}
+      case 4:
+      {
+    		sprintf(buf,"%4d",OS_TICKS_PER_SEC);
+    	  lcdWrStr(buf);
+    	  break;
+    	}
+      case 5:
+      {
+    		lcdWrStr("uCOS");
+    	  break;
+    	}
+      case 0:
+      default:
+      {
+        sprintf(buf, "%4d", OSTimeGet()/100);         // convert value to a string
+        lcdWrStr(buf);                                // write value to LCD  
+        break;
+    	}
+    }
+  
+    OSTimeDlyHMSM(0, 0, 0, 10);	  
+  }
 }
 
 /*
@@ -319,23 +329,25 @@ static  void  App_TaskLCD (void *p_arg)
 
 static  void  App_TaskKbd (void *p_arg)
 {
-    INT8U  b1,b2;
+  INT8U  b1,b2;
 	INT8U  err;
-    (void)p_arg;
+  (void)p_arg;
 
-	 
-    while (DEF_TRUE) {
-	    OSSemPend(InfoSem,0,&err);
-        b1 = BSP_PB_GetStatus(BSP_PB_ID_KEY1);
+  while (DEF_TRUE) 
+  {
+	  OSSemPend(InfoSem,0,&err);
+    b1 = BSP_PB_GetStatus(BSP_PB_ID_KEY1);
 		b2 = BSP_PB_GetStatus(BSP_PB_ID_KEY2);
-		if (b1 == 1)	{
-		App_DispScr_SignOn();
+		if (b1 == 1)
+		{
+		  App_DispScr_SignOn();
 		} 
-		if (b2 == 2)	{
-		OSMboxPost(Disp_Box,(void*)0);
+		if (b2 == 2)
+		{
+		  OSMboxPost(Disp_Box,(void*)0);
 		}
 		OSTimeDlyHMSM(0, 0, 0, 10); 
-    }
+  }
 }
 
 /*
@@ -356,19 +368,20 @@ static  void  App_TaskKbd (void *p_arg)
 
 static  void  App_TaskJoystick (void *p_arg)
 {
-    INT8U  Joystick=0;
+  INT8U  Joystick=0;
 
-    (void)p_arg;
+  (void)p_arg;
 
 	 
-    while (DEF_TRUE) {
-        Joystick = BSP_Joystick_GetStatus();
-		if(Joystick!=0) OSMboxPost(Disp_Box,(void*)Joystick);
+  while (DEF_TRUE)
+  {
+    Joystick = BSP_Joystick_GetStatus();
+		if(Joystick!=0)
+		  OSMboxPost(Disp_Box,(void*)Joystick);
 		OSSemPost(InfoSem);
 		OSTimeDlyHMSM(0, 0, 0, 10);
-    }
+  }
 }
-
 
 /*
 *********************************************************************************************************
@@ -388,43 +401,17 @@ static  void  App_TaskJoystick (void *p_arg)
 
 static  void  App_DispScr_SignOn (void)
 {
-
-
-    printf("\r\n  Micrium uC/OS-II  \r\n");
-    printf("  ST STM32 (Cortex-M3)\r\n\r\n");
-
-    printf("  uC/OS-II:  V%ld.%ld%ld\r\n",OSVersion()/100,(OSVersion() % 100) / 10,(OSVersion() % 10));
-    printf("  TickRate: %ld  \r\n",OS_TICKS_PER_SEC);
-    printf("  CPU Usage: %ld%    \r\n",OSCPUUsage);
-    printf("  CPU Speed:%ld MHz  \r\n",BSP_CPU_ClkFreq() / 1000000L);
-    printf("  #Ticks: %ld  \r\n",OSTime);
-    printf("  #CtxSw: %ld  \r\n\r\n",OSCtxSwCtr);
-
+  printf("\n\r###########################################################");
+  printf("\n\r# Micrium uC/OS-II");
+  printf("\n\r# ST STM32 (Cortex-M3)\n\r#");
+  printf("\n\r# uC/OS-II:  V%ld.%ld%ld",OSVersion()/100,(OSVersion() % 100) / 10,(OSVersion() % 10));
+  printf("\n\r# TickRate: %ld",OS_TICKS_PER_SEC);
+  printf("\n\r# CPU Usage: %ld%",OSCPUUsage);
+  printf("\n\r# CPU Speed:%ld MHz",BSP_CPU_ClkFreq() / 1000000L);
+  printf("\n\r# Ticks: %ld",OSTime);
+  printf("\n\r# CtxSw: %ld",OSCtxSwCtr);
+  printf("\n\r###########################################################\n\r");
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 *********************************************************************************************************
@@ -449,7 +436,6 @@ static  void  App_DispScr_SignOn (void)
 
 void  App_TaskCreateHook (OS_TCB *ptcb)
 {
-
 }
 
 /*
@@ -466,7 +452,7 @@ void  App_TaskCreateHook (OS_TCB *ptcb)
 
 void  App_TaskDelHook (OS_TCB *ptcb)
 {
-    (void)ptcb;
+  (void)ptcb;
 }
 
 /*
@@ -523,7 +509,6 @@ void  App_TaskStatHook (void)
 #if OS_TASK_SW_HOOK_EN > 0
 void  App_TaskSwHook (void)
 {
-
 }
 #endif
 
@@ -543,7 +528,7 @@ void  App_TaskSwHook (void)
 #if OS_VERSION >= 204
 void  App_TCBInitHook (OS_TCB *ptcb)
 {
-    (void)ptcb;
+  (void)ptcb;
 }
 #endif
 

@@ -101,22 +101,12 @@ static  void  BSP_PB_Init      (void);
 
 static  void GPIO_Configuration(void);
 
-#ifdef __GNUC__
-  /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
-     set to 'Yes') calls __io_putchar() */
-  #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
-#else
-  #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
-#endif /* __GNUC__ */
-
-/*******************************************************************************
-* Function Name  : PUTCHAR_PROTOTYPE
-* Description    : Retargets the C library printf function to the USART.
-* Input          : None
-* Output         : None
-* Return         : None
-*******************************************************************************/
-PUTCHAR_PROTOTYPE
+/**
+  * @brief  Retargets the C library printf function to the USART.
+  * @param  char for printf
+  * @retval None
+  */
+int  sendchar(int ch)
 {
   /* Write a character to the USART */
   USART_SendData(USART1, (u8) ch);
@@ -125,9 +115,24 @@ PUTCHAR_PROTOTYPE
   while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
   {
   }
-    return ch;
+
+  return ch;
 }
 
+/**
+  * @brief  Retargets the C library printf function to the USART.
+  * @param  None
+  * @retval None
+  */
+int  getkey(void)
+{
+  /* Loop until the end of transmission */
+  while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET)
+  {
+  }
+
+  return ((int)USART_ReceiveData(USART1));
+}
 
 /*
 *********************************************************************************************************
