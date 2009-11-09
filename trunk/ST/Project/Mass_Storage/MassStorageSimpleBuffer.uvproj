@@ -135,7 +135,7 @@
             <RestoreToolbox>1</RestoreToolbox>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>1</TargetSelection>
+          <TargetSelection>7</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -149,7 +149,7 @@
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
             <InitializationFile></InitializationFile>
-            <Driver>BIN\UL2CM3.DLL</Driver>
+            <Driver>Segger\JL2CM3.dll</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -159,9 +159,9 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4097</DriverSelection>
+            <DriverSelection>4098</DriverSelection>
           </Flash1>
-          <Flash2>BIN\UL2CM3.DLL</Flash2>
+          <Flash2>Segger\JL2CM3.dll</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
         </Utilities>
@@ -386,14 +386,9 @@
           <GroupName>User</GroupName>
           <Files>
             <File>
-              <FileName>usb_scsi.c</FileName>
+              <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\usb_scsi.c</FilePath>
-            </File>
-            <File>
-              <FileName>fsmc_nand.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\fsmc_nand.c</FilePath>
+              <FilePath>.\src\main.c</FilePath>
             </File>
             <File>
               <FileName>hw_config.c</FileName>
@@ -401,19 +396,9 @@
               <FilePath>.\src\hw_config.c</FilePath>
             </File>
             <File>
-              <FileName>main.c</FileName>
+              <FileName>stm32f10x_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>mass_mal.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\mass_mal.c</FilePath>
-            </File>
-            <File>
-              <FileName>memory.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\memory.c</FilePath>
+              <FilePath>.\src\stm32f10x_it.c</FilePath>
             </File>
             <File>
               <FileName>msd.c</FileName>
@@ -426,9 +411,14 @@
               <FilePath>.\src\nand_if.c</FilePath>
             </File>
             <File>
-              <FileName>scsi_data.c</FileName>
+              <FileName>fsmc_nand.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\scsi_data.c</FilePath>
+              <FilePath>.\src\fsmc_nand.c</FilePath>
+            </File>
+            <File>
+              <FileName>mass_mal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\mass_mal.c</FilePath>
             </File>
             <File>
               <FileName>sdcard.c</FileName>
@@ -436,9 +426,19 @@
               <FilePath>.\src\sdcard.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f10x_it.c</FileName>
+              <FileName>memory.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\stm32f10x_it.c</FilePath>
+              <FilePath>.\src\memory.c</FilePath>
+            </File>
+            <File>
+              <FileName>scsi_data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\scsi_data.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_scsi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\usb_scsi.c</FilePath>
             </File>
             <File>
               <FileName>usb_bot.c</FileName>
@@ -506,14 +506,14 @@
           <GroupName>StdPeriph_Driver</GroupName>
           <Files>
             <File>
-              <FileName>stm32f10x_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\SDK\Libraries\src\stm32f10x_spi.c</FilePath>
-            </File>
-            <File>
               <FileName>misc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\SDK\Libraries\src\misc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDK\Libraries\src\stm32f10x_spi.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_dma.c</FileName>
