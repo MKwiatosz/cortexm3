@@ -126,9 +126,7 @@ BOOL CTimerDlg::OnInitDialog()
   // GetLocalTime(&st);
   // strDate.Format("%4d-%2d-%2d",st.wYear,st.wMonth,st.wDay);
   // strTime.Format("%2d:%2d:%2d",st.wHour,st.wMinute,st.wSecond) ;
-  GetLocalTime(&st);
-  str.Format("%2d:%2d:%2d",st.wHour,st.wMinute,st.wSecond);
-	m_lcd.SetText(str);
+	m_lcd.SetText("00:00:00");
 	SetTimer(1,1000,NULL);
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -188,7 +186,7 @@ void CTimerDlg::OnTimer(UINT nIDEvent)
 	if(nIDEvent)
 	{
     GetLocalTime(&st);
-    str.Format("%2d:%2d:%2d",st.wHour,st.wMinute,st.wSecond);
+    str.Format("%02d:%02d:%02d",st.wHour,st.wMinute,st.wSecond);
 	  m_lcd.SetText(str);
 	}
 
