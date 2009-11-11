@@ -548,17 +548,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>RVMDK</GroupName>
-          <Files>
-            <File>
-              <FileName>startup_stm32f10x_hd.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\src\startup_stm32f10x_hd.s</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>CMSIS</GroupName>
+          <GroupName>CM3 Core</GroupName>
           <Files>
             <File>
               <FileName>core_cm3.c</FileName>
@@ -569,6 +559,11 @@
               <FileName>system_stm32f10x.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\SDK\Core\src\system_stm32f10x.c</FilePath>
+            </File>
+            <File>
+              <FileName>startup_stm32f10x_md.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\SDK\Core\startup\startup_stm32f10x_md.s</FilePath>
             </File>
           </Files>
         </Group>
