@@ -14,7 +14,7 @@
  *---------------------------------------------------------------------------*/
 
 #include <string.h>
-#include <LPC23xx.H>                                  /* LPC23xx definitions */
+#include "LPC23xx.H"                                  /* LPC23xx definitions */
 
 #include "type.h"
 #include "usb.h"
