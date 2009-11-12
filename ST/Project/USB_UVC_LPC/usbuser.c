@@ -13,7 +13,7 @@
  *      Copyright (c) 2005-2007 Keil Software.
  *---------------------------------------------------------------------------*/
 
-#include <LPC23xx.H>                                  /* LPC23xx definitions */
+#include "LPC23xx.H"                                  /* LPC23xx definitions */
 
 #include "type.h"
 
