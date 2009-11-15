@@ -37,7 +37,7 @@ int main (void) {
   LCD_cur_off();
   LCD_cls();
   LCD_puts("MCB2300 USB UVC");
-  LCD_puts("  www.keil.com  ");
+  LCD_puts(" -=www.keil.com=- ");
 
 
   USB_Init();                               /* USB Initialization */
