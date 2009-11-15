@@ -127,7 +127,7 @@
           <Target>
             <UseTarget>1</UseTarget>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>0</RunToMain>
+            <RunToMain>1</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
             <RestoreWatchpoints>1</RestoreWatchpoints>
             <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
@@ -135,7 +135,7 @@
             <RestoreToolbox>1</RestoreToolbox>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>0</TargetSelection>
+          <TargetSelection>6</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -149,7 +149,7 @@
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
             <InitializationFile>.\debug.ini</InitializationFile>
-            <Driver>BIN\UL2ARM.DLL</Driver>
+            <Driver>Segger\JLTAgdi.dll</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -157,11 +157,11 @@
             <UseTargetDll>1</UseTargetDll>
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
-            <UpdateFlashBeforeDebugging>0</UpdateFlashBeforeDebugging>
+            <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4096</DriverSelection>
+            <DriverSelection>4098</DriverSelection>
           </Flash1>
-          <Flash2>BIN\UL2ARM.DLL</Flash2>
+          <Flash2>Segger\JLTAgdi.dll</Flash2>
           <Flash3>"LPC210x_ISP.EXE" ("#H" ^X $D COM1: 38400 1)</Flash3>
           <Flash4></Flash4>
         </Utilities>
