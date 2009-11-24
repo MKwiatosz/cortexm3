@@ -42,7 +42,7 @@ void SPI_Config(void)
 
   /* 
    * Configure PD9 pin: CS pin
-     Configure PD10 pin: PWR pin 
+   * Configure PD10 pin: PWR pin 
   */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_10;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -142,9 +142,9 @@ euint8 if_spiSend(hwInterface *iface, euint8 outgoing)
 	euint8 incoming;
 
 	MSD_CS_LOW();
-	SPI_I2S_SendData(SPI1, outgoing);
+	SPI1->DR = outgoing; /* SPI_I2S_SendData(SPI1, outgoing); */
 	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
-	incoming = SPI_I2S_ReceiveData(SPI1);
+	incoming = SPI1->DR; /* SPI_I2S_ReceiveData(SPI1);        */
 	MSD_CS_HIGH();
 
 	return(incoming);

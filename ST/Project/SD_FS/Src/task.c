@@ -124,7 +124,7 @@ void Speed_SD(char *param)
     return;
   }
   
-  /* Display the file */
+  /* Display the file info */
   size = file_r.FileSize;
   Total = size;
   printf_1("\r\nFile size: %d bytes",size);
