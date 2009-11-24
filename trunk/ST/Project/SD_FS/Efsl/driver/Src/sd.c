@@ -268,7 +268,7 @@ esint8 sd_readSector(hwInterface *iface,euint32 address, euint8* buf, euint16 le
 	euint32 place;
 
 	/*DBG((TXT("sd_readSector::Trying to read sector %u and store it at %p.\n"),address,&buf[0]));*/
-	place=512*address;
+	place = address << 9; /* 512*address */
 	sd_Command(iface,CMDREAD, (euint16) (place >> 16), (euint16) place);
 	
 	cardresp=sd_Resp8b(iface); /* Card response */ 
@@ -287,14 +287,12 @@ esint8 sd_readSector(hwInterface *iface,euint32 address, euint8* buf, euint16 le
 	MSD_CS_LOW();
 	for(i=0;i<len;i++)
 	{
-	  // SPI_I2S_SendData(SPI1, 0xff);
-	  SPI1->DR = 0xff;
+	  SPI1->DR = 0xff;   /* SPI_I2S_SendData(SPI1, 0xff);       */
 	  while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
-	  // buf[i] = SPI_I2S_ReceiveData(SPI1);
-	  buf[i] = SPI1->DR;
+	  buf[i] = SPI1->DR; /* buf[i] = SPI_I2S_ReceiveData(SPI1); */
   }
   MSD_CS_HIGH();
-  
+ 
 	/* Checksum (2 byte) - ignore for now */
 	if_spiSend(iface,0xff);
 	if_spiSend(iface,0xff);
