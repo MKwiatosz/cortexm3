@@ -12,6 +12,7 @@
 #include "hw_config.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -156,6 +157,32 @@ void Speed_SD(char *param)
   else
     printf_1("\r\nTime < 1ms.");
 	file_fclose(&file_r);
+}
+
+/*******************************************************************************
+* Function Name  : Write_SD
+* Description    : Write file to SD.
+* Input          : None.
+* Output         : None.
+* Return         : None.
+*******************************************************************************/
+static char TestTXT[] = "This is a test TXT file !";
+void Write_SD(char *param)
+{
+  uint32_t Size;
+  EmbeddedFile file_w;
+  
+  if(file_fopen(&file_w,&efs.myFs,"test.txt",'w') == 0)
+  {
+    Size = strlen(TestTXT);
+    if(Size == file_write(&file_w,Size,(euint8 *)TestTXT))
+      printf_1("\r\nSuccess !");
+    else
+      printf_1("\r\nFail !");
+    file_fclose(&file_w);
+  }
+  else
+    printf_1("\r\nError for create a file.");
 }
 
 /******************* (C) COPYRIGHT 2009 developer.cortex *******END OF FILE****/
