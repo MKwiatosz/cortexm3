@@ -45,6 +45,13 @@ cmd_t basic_cmd_array[] =
     NULL
   },
 
+  {
+    "write",
+    (cmdHandler)Write_SD,    
+    "test write a file to SD. Usage: write",
+    NULL
+  },
+  
   { NULL,NULL,NULL,NULL}
 };
 
