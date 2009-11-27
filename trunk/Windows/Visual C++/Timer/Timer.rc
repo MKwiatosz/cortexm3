@@ -88,7 +88,7 @@ IDD_TIMER_DIALOG DIALOGEX 0, 0, 278, 92
 STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "Timer"
-FONT 9, "宋体"
+FONT 9, "宋体", 0, 0, 0x1
 BEGIN
     LTEXT           "LCD",IDC_LCD,0,0,278,92,0,WS_EX_STATICEDGE
 END
@@ -115,8 +115,9 @@ VS_VERSION_INFO VERSIONINFO
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-        BLOCK "080404B0"
+        BLOCK "080404b0"
         BEGIN
+            VALUE "Comments", "\0"
             VALUE "CompanyName", "\0"
             VALUE "FileDescription", "Timer Microsoft 基础类应用程序\0"
             VALUE "FileVersion", "1, 0, 0, 1\0"
@@ -124,8 +125,10 @@ BEGIN
             VALUE "LegalCopyright", "版权所有 (C) 2009\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "Timer.EXE\0"
+            VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Timer 应用程序\0"
             VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
         END
     END
     BLOCK "VarFileInfo"
