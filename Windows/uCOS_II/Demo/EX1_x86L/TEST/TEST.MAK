@@ -33,20 +33,17 @@ SOURCE=..\SOURCE
 TARGET=..\TEST
 WORK=..\WORK
 
-BaseDir=..\..\..\..
-OS=$(BaseDir)\uCOS-II-252
-PC=$(BaseDir)\uC-Ports\Win32\PC
-PORT=$(BaseDir)\uC-Ports\Win32\Ix86L-FP
+BaseDir=..\..\..\..\..
+OS=$(BaseDir)\uCOS_II_V2.52
+PC=$(BaseDir)\Windows\uCOS_II\uC_Port\PC
+PORT=$(BaseDir)\Windows\uCOS_II\uC_Port\Ix86L
 
-#/*$PAGE*/
 ###############################################################################
 #                               COMPILER FLAGS
 #
 # -1                 Generate 80186 code
 # -B                 Compile and call assembler
 # -c                 Compiler to .OBJ
-# -d                 Merge duplicate strings
-# -f287              Use FPU hardware instructions
 # -G                 Select code for speed
 # -I                 Path to include   directory
 # -k-                Standard stack frame
@@ -58,7 +55,6 @@ PORT=$(BaseDir)\uC-Ports\Win32\Ix86L-FP
 # -Ob                Dead code elimination
 # -Oe                Global register allocation
 # -Og                Optimize globally
-# -Oi                Expand common intrinsic functions inline
 # -Ol                Loop optimization
 # -Om                Invariant code motion
 # -Op                Copy propagation
@@ -70,7 +66,7 @@ PORT=$(BaseDir)\uC-Ports\Win32\Ix86L-FP
 ###############################################################################
 #
 
-C_FLAGS=-f287 -c -ml -1 -G -O -Ogemvlbpi -Z -d -n..\obj -k- -v -vi- -wpro -I$(BORLAND)\INCLUDE -L$(BORLAND)\LIB
+C_FLAGS=-c -ml -1 -G -O -Ogemvlbpi -Z -d -n..\obj -k- -v -vi- -wpro -I$(BORLAND)\INCLUDE -L$(BORLAND)\LIB
 
 ###############################################################################
 #                               ASSEMBLER FLAGS
@@ -100,7 +96,7 @@ INCLUDES=      $(SOURCE)\INCLUDES.H  \
                $(OS)\uCOS_II.H               
 
 ###############################################################################
-#                          CREATION OF .HEX FILES
+#                          CREATION OF .EXE FILE
 ###############################################################################
 
 $(TARGET)\TEST.EXE:                  \
@@ -176,5 +172,6 @@ $(WORK)\INCLUDES.H:                   \
                COPY   $(SOURCE)\INCLUDES.H  INCLUDES.H
                COPY   $(SOURCE)\OS_CFG.H    OS_CFG.H
                COPY   $(PC)\PC.H            PC.H
+               COPY   $(SOURCE)\APP_CFG.H   APP_CFG.H
                COPY   $(PORT)\OS_CPU.H      OS_CPU.H
                COPY   $(OS)\uCOS_II.H       uCOS_II.H

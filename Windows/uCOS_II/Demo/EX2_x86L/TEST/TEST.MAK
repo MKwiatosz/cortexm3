@@ -33,10 +33,10 @@ SOURCE=..\SOURCE
 TARGET=..\TEST
 WORK=..\WORK
 
-BaseDir=..\..\..\..
-OS=$(BaseDir)\uCOS-II-252
-PC=$(BaseDir)\uC-Ports\Win32\PC
-PORT=$(BaseDir)\uC-Ports\Win32\Ix86L
+BaseDir=..\..\..\..\..
+OS=$(BaseDir)\uCOS_II_V2.52
+PC=$(BaseDir)\Windows\uCOS_II\uC_Port\PC
+PORT=$(BaseDir)\Windows\uCOS_II\uC_Port\Ix86L
 
 ###############################################################################
 #                               COMPILER FLAGS
