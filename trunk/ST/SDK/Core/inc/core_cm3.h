@@ -82,7 +82,7 @@
 /*lint -e751 */
 
 
-#include <stdint.h>                           /* Include standard types */
+#include "stdint.h"                           /* Include standard types */
 
 #if defined (__ICCARM__)
   #include <intrinsics.h>                     /* IAR Intrinsics   */
