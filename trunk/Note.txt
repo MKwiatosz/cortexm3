@@ -4,3 +4,25 @@ RC6-IR:
   http://www.sbprojects.com/knowledge/ir/rc6.htm
   http://www.guiott.com/wrc/RC6-0.html
   http://usbpicprog.org/
+
+Foxmail - Yahoo
+第一步:开通POP功能:
+将下面的地址（用户名要换成你的用户名）直接复制到IE地址栏打开
+http://edit.my.yahoo.com/config/set_popfwd?.src=ym&done=http://cn.<用户名>.mail.com/
+
+如：http://edit.my.yahoo.com/config/set_popfwd?.src=ym&done=http://cn.<abdhk>.mail.com/
+
+登录，然后选择[网上阅读邮件和 POP 功能]，提交。
+
+第二步:设置Foxmail:
+1.“邮箱”-“修改邮箱帐户属性”
+2.选择“邮件服务器
+① SMTP服务器要填写：smtp.mail.yahoo.com。（雅虎公布的smtp.mail.yahoo.cn没用！）
+POP3服务器填写：如果你的邮箱是@yahoo.cn那么填写pop.mail.yahoo.cn，如果是@yahoo.com.cn，那么填写pop.mail.yahoo.com。
+② POP3邮箱帐号一定写邮箱全称，如：xxx@yahoo.cn （仅用户名没用，因为雅虎要区分是@yahoo.cn还是@yahoo.com.cn用户）
+③ 密码：输入你的帐号密码
+④ 一定要选中：“SMTP服务器需要身份验证”
+⑤ 点“高级”，
+SMTP服务器端口：465 ；选中“此服务器需求安全连接（SSL）（U）”
+POP3服务器端口：995 ；选中“此服务器需求安全连接（SSL）（F）”
+⑥ 完成，确定，确定，OK。
