@@ -176,6 +176,11 @@ SysTick_Handler PROC
                 B       .
                 ENDP
 
+USART2_IRQHandler PROC
+                EXPORT  USART2_IRQHandler            [WEAK]
+                B       .
+                ENDP
+
 Default_Handler PROC
 
                 EXPORT  WWDG_IRQHandler            [WEAK]
@@ -216,7 +221,6 @@ Default_Handler PROC
                 EXPORT  SPI1_IRQHandler            [WEAK]
                 EXPORT  SPI2_IRQHandler            [WEAK]
                 EXPORT  USART1_IRQHandler          [WEAK]
-                EXPORT  USART2_IRQHandler          [WEAK]
                 EXPORT  USART3_IRQHandler          [WEAK]
                 EXPORT  EXTI15_10_IRQHandler       [WEAK]
                 EXPORT  RTCAlarm_IRQHandler        [WEAK]
@@ -260,7 +264,6 @@ I2C2_ER_IRQHandler
 SPI1_IRQHandler
 SPI2_IRQHandler
 USART1_IRQHandler
-USART2_IRQHandler
 USART3_IRQHandler
 EXTI15_10_IRQHandler
 RTCAlarm_IRQHandler
