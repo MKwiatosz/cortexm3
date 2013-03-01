@@ -17,7 +17,7 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
-#define I2C_NOP()                      gpio_i2c_delay(200)
+#define I2C_NOP()                      gpio_i2c_delay(500)
 
 /* Private variables ---------------------------------------------------------*/
 GPIO_InitTypeDef  GPIO_InitStructure;
@@ -79,29 +79,19 @@ void gpio_i2c_delay(uint32_t time)
 
 /******************************************************************************/
 /**
-  * @fn     void gpio_i2c_init(void)
-  * @brief  gpio i2c init.
-  * @retval None
-  */
-void gpio_i2c_init(void)
-{
-	SDA_H;
-	SCL_H;
-}
-
-/******************************************************************************/
-/**
   * @fn     void gpio_i2c_start(void)
   * @brief  gpio i2c start.
   * @retval None
   */
 void gpio_i2c_start(void)
 {
-	SDA_H;
+	SDA_H;                                        /* 发送起始条件的数据信号   */
 	I2C_NOP();
 	SCL_H;
-	I2C_NOP();
-	SDA_L;
+	I2C_NOP();                                    /* 起始条件建立时间 > 4.7us */
+	SDA_L;                                        /* 发送起始信号             */
+	I2C_NOP();                                    /* 起始信号锁定时间 > 4us   */
+	SCL_L;                                        /* 钳住I2C总线，准备发或收  */
 	I2C_NOP();
 }
 
@@ -113,47 +103,11 @@ void gpio_i2c_start(void)
   */
 void gpio_i2c_stop(void)
 {
-	SDA_L;
+	SDA_L;                                          /* 发送结束条件的数据信号 */
 	I2C_NOP();
-	SCL_H;
+	SCL_H;                                          /* 发送结束条件的时钟信号 */
 	I2C_NOP();
-	SDA_H;
-	I2C_NOP();
-}
-
-/******************************************************************************/
-/**
-  * @fn     void gpio_i2c_ack(void)
-  * @brief  gpio i2c ack.
-  * @retval None
-  */
-void gpio_i2c_ack(void)
-{
-	uint32_t timeout = 0;
-
-	SCL_H;
-	I2C_NOP();
-	while(SDA_READ == 1 && timeout < 2000){
-		timeout++;
-	}
-	SCL_L;
-	I2C_NOP();
-}
-
-
-/******************************************************************************/
-/**
-  * @fn     void gpio_i2c_nack(void)
-  * @brief  gpio i2c nack.
-  * @retval None
-  */
-void gpio_i2c_nack(void)
-{
-	SDA_H;
-	I2C_NOP();
-	SCL_H;
-	I2C_NOP();
-	SCL_L;
+	SDA_H;                                          /* 发送I2C总线结束信号    */
 	I2C_NOP();
 }
 
@@ -167,7 +121,7 @@ void gpio_i2c_write(uint8_t data_write)
 {
 	uint8_t i;
 
-	SCL_L;
+	/* 此时SCL_L，钳住I2C总线 */
 	for(i = 0; i < 8; i++){
 		if(data_write & 0x80)
 			SDA_H;
@@ -180,8 +134,6 @@ void gpio_i2c_write(uint8_t data_write)
 		SCL_L;
 		I2C_NOP();
 	}
-	SCL_H;
-	I2C_NOP();
 }
 
 /******************************************************************************/
@@ -194,21 +146,38 @@ uint8_t gpio_i2c_read(void)
 {
 	uint8_t i, data_read = 0;
 
-	SCL_L;
-	I2C_NOP();
-	SDA_H;
-	I2C_NOP();
+	SDA_H;                                              /* 置数据线为输入模式 */
 	for(i = 0; i < 8; i++){
-		SCL_H;
+		SCL_H;                                        /* 置时钟为高，数据有效 */
 		I2C_NOP();
 		data_read = data_read << 1;
 		if(SDA_READ == 1)
 			data_read++;
-		SCL_L;
+		SCL_L;                                        /* 置时钟为低，准备接受 */
 		I2C_NOP();
 	}
 
 	return data_read;
+}
+
+/******************************************************************************/
+/**
+  * @fn     uint8_t gpio_i2c_ack(void)
+  * @brief  gpio i2c ack.
+  * @retval None
+  */
+uint8_t gpio_i2c_ack(void)
+{
+	uint8_t ack;
+
+	SDA_H;                                      /* 释放数据线，准备接受应答位 */
+	I2C_NOP();
+	SCL_H;                                      
+	I2C_NOP();
+	ack = SDA_READ;                                             /* 读取应答位 */
+	SCL_L;
+	I2C_NOP();
+	return ack;
 }
 
 /********************** (C) COPYRIGHT 2013 AEE  *****************END OF FILE***/

@@ -20,6 +20,10 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
+#define KS103_DATA_ERROR               0xFFFFFFFF
+#define KS103_READ_DELAY_x_MS          100
+#define KS103_ERROR_STR                "ERR."
+
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -30,44 +34,56 @@ static void ks103_send_cmd_uart(uint8_t addr, uint8_t reg, uint8_t cmd)
 	sendchar_uart2(cmd);
 }
 
-static void ks103_send_cmd_i2c(uint8_t addr, uint8_t reg, uint8_t cmd)
+static uint32_t ks103_send_cmd_i2c(uint8_t addr, uint8_t reg, uint8_t cmd)
 {
-	gpio_i2c_init();
 	gpio_i2c_start();
 	gpio_i2c_write(addr);
-	gpio_i2c_ack();
+	if(gpio_i2c_ack() != 0){ /* 无应答 */
+		return KS103_DATA_ERROR;
+	}
 	gpio_i2c_write(reg);
-	gpio_i2c_ack();
+	if(gpio_i2c_ack() != 0){ /* 无应答 */
+		return KS103_DATA_ERROR;
+	}
 	gpio_i2c_write(cmd);
 	gpio_i2c_ack();
 	gpio_i2c_stop();
+	return 0;
 }
 
-static uint8_t ks103_read_reg_i2c(uint8_t addr, uint8_t reg)
+static uint32_t ks103_read_reg_i2c(uint8_t addr, uint8_t reg)
 {
 	uint8_t data_read;
 
-	gpio_i2c_init();
+	/* 需要读取的寄存器 */
 	gpio_i2c_start();
 	gpio_i2c_write(addr);
-	gpio_i2c_ack();
+	if(gpio_i2c_ack() != 0){ /* 无应答 */
+		return KS103_DATA_ERROR;
+	}
 	gpio_i2c_write(reg);
-	gpio_i2c_ack();
+	if(gpio_i2c_ack() != 0){ /* 无应答 */
+		return KS103_DATA_ERROR;
+	}
+
+	/* 读取寄存器的数值 */
 	gpio_i2c_start();
 	gpio_i2c_write(addr + 1);
-	gpio_i2c_ack();
+	if(gpio_i2c_ack() != 0){ /* 无应答 */
+		return KS103_DATA_ERROR;
+	}
 	data_read = gpio_i2c_read();
-	gpio_i2c_nack();
+	gpio_i2c_ack();
 	gpio_i2c_stop();
 
-	return data_read;
+	return (uint32_t) data_read;
 }
 
 static void ks103_delay(void)
 {
 	uint32_t timeout;
 
-	timeout = SysTick_1ms + 100;
+	timeout = SysTick_1ms + KS103_READ_DELAY_x_MS;
 	while(SysTick_1ms < timeout){
 	}
 }
@@ -114,7 +130,7 @@ void detect_uart(char *param)
 		for(i=0; i<UART2_RxT_Index; i++){
 			printf("0x%02x ", UART2_RxT_BUF[i%16]);
 		}
-		lcdWrStr("0000");
+		lcdWrStr(KS103_ERROR_STR);
 	}
 }
 
@@ -127,16 +143,30 @@ void auto_detect_uart(char *param)
 
 void detect_i2c(char *param)
 {
-	uint32_t distance;
+	uint32_t distance1, distance2;
 	char buf[16];
 
-	ks103_send_cmd_i2c(0xe8, 0x02, 0xbc);
+	if(ks103_send_cmd_i2c(0xe8, 0x02, 0xbc) == KS103_DATA_ERROR){
+		printf("\r\nks103_send_cmd_i2c: bus error!");
+		lcdWrStr(KS103_ERROR_STR);
+		return;
+	}
 	ks103_delay();
-	distance = ks103_read_reg_i2c(0xe8, 0x02);
-	distance = distance << 8;
-	distance = distance + ks103_read_reg_i2c(0xe8, 0x03);
-	printf("\r\ndistance: %d mm", distance);
-	sprintf(buf,"%4d",distance);
+	distance1 = ks103_read_reg_i2c(0xe8, 0x02);
+	if(distance1 == KS103_DATA_ERROR){
+		printf("\r\nks103_read_reg_i2c - 0x02: bus error!");
+		lcdWrStr(KS103_ERROR_STR);
+		return;		
+	}
+	distance2 = ks103_read_reg_i2c(0xe8, 0x03);
+	if(distance2 == KS103_DATA_ERROR){
+		printf("\r\nks103_read_reg_i2c - 0x03: bus error!");
+		lcdWrStr(KS103_ERROR_STR);
+		return;		
+	}
+	distance2 = distance2 + (distance1 << 8);
+	printf("\r\ndistance: %d mm", distance2);
+	sprintf(buf,"%4d",distance2);
 	lcdWrStr(buf);
 }
 
