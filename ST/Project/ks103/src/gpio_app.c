@@ -49,8 +49,8 @@ void gpio_config(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOE, &GPIO_InitStructure);
 
-	/* Config key2 - PD3 */
-	GPIO_InitStructure.GPIO_Pin	= GPIO_Pin_3;
+	/* Config key2 - PD3,  key3 - PD4 */
+	GPIO_InitStructure.GPIO_Pin	= GPIO_Pin_3 | GPIO_Pin_4;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOD, &GPIO_InitStructure);
