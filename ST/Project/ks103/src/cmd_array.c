@@ -38,6 +38,20 @@ cmd_t basic_cmd_array[] =
     NULL
   },
 
+	{
+	  "detect_i2c",
+	  (cmdHandler)detect_i2c,	  
+	  "detect distance from ks103 via i2c",   
+	  NULL
+	},
+	
+	{
+	  "auto_i2c",
+	  (cmdHandler)auto_detect_i2c,    
+	  "auto detect distance from ks103 via i2c",	
+	  NULL
+	},
+
   { NULL,NULL,NULL,NULL}
 };
 

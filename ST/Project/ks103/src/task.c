@@ -15,6 +15,7 @@
 #include <string.h>
 #include "lcd.h"
 #include "uart_app.h"
+#include "gpio_app.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -106,6 +107,63 @@ void auto_detect_uart(char *param)
 			}
 		}
 	}
+}
+
+void detect_i2c(char *param)
+{
+	uint8_t  buf[2];
+	uint32_t timeline, distance;
+
+	gpio_i2c_init();
+	gpio_i2c_start();
+	gpio_i2c_write(0xe8);
+	gpio_i2c_ack();
+	gpio_i2c_write(0x02);
+	gpio_i2c_ack();
+	gpio_i2c_write(0xbc);
+	gpio_i2c_ack();
+	gpio_i2c_stop();
+
+	timeline = SysTick_1ms + 100;
+	printf("\r\nWait %d ms ...", timeline - SysTick_1ms);
+	while(SysTick_1ms < timeline){
+	}
+
+	gpio_i2c_init();
+	gpio_i2c_start();
+	gpio_i2c_write(0xe8);
+	gpio_i2c_ack();
+	gpio_i2c_write(0x02);
+	gpio_i2c_ack();
+	gpio_i2c_start();
+	gpio_i2c_write(0xe9);
+	gpio_i2c_ack();
+	buf[0] = gpio_i2c_read();
+	gpio_i2c_nack();
+	gpio_i2c_stop();
+
+	gpio_i2c_init();
+	gpio_i2c_start();
+	gpio_i2c_write(0xe8);
+	gpio_i2c_ack();
+	gpio_i2c_write(0x03);
+	gpio_i2c_ack();
+	gpio_i2c_start();
+	gpio_i2c_write(0xe9);
+	gpio_i2c_ack();
+	buf[1] = gpio_i2c_read();
+	gpio_i2c_nack();
+	gpio_i2c_stop();
+
+	distance = buf[0];
+	distance = distance << 8;
+	distance = distance + buf[1];
+	printf("\r\ndistance: %d mm", distance);
+}
+
+void auto_detect_i2c(char *param)
+{
+
 }
 
 /******************* (C) COPYRIGHT 2009 developer.cortex *******END OF FILE****/

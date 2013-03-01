@@ -22,6 +22,8 @@
 extern void main_task(void);
 extern void detect_uart(char *param);
 extern void auto_detect_uart(char *param);
+extern void detect_i2c(char *param);
+extern void auto_detect_i2c(char *param);
 
 #endif /* __TASK_H */
 /******************* (C) COPYRIGHT 2009 developer.cortex *******END OF FILE****/
