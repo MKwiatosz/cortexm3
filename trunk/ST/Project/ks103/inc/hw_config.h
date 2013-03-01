@@ -19,12 +19,9 @@
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* External variables --------------------------------------------------------*/
-extern USART_InitTypeDef USART_InitStructure;
-extern GPIO_InitTypeDef  GPIO_InitStructure;
-
 /* Exported functions ------------------------------------------------------- */
-extern void HardwareConfigure(void);
-extern void PrintSysInfo(void);
+extern void hardware_config(void);
+extern void print_sys_info(void);
 
 #endif /* __HW_CONFIG_H */
 /******************* (C) COPYRIGHT 2009 developer.cortex *******END OF FILE****/

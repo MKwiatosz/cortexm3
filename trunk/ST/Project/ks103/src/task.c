@@ -14,15 +14,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include "lcd.h"
+#include "uart_app.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
-extern int  sendchar2(int ch);
-extern int  getkey2(void);
-
 /* Private functions ---------------------------------------------------------*/
 /*******************************************************************************
 * Function Name  : MainTask
@@ -31,30 +29,31 @@ extern int  getkey2(void);
 * Output         : None.
 * Return         : None.
 *******************************************************************************/
-void MainTask(void)
+void main_task(void)
 {
-  /* Init console */
-  cmdHelpInit();
-  cmdBasicInit();
+	/* Init console */
+	cmdHelpInit();
+	cmdBasicInit();
 
-  /* Main task */
+	/* Main task */
 	lcdClr();
 	lcdWrStr("0000");
-  while(1)
-  {
-    cmdMonitor();
-		AutoDetect("");
-  }
+	while(1){
+		if(GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_3) == 0){
+			auto_detect_uart("");
+		}
+		cmdMonitor();
+	}
 }
 
-void Detect(char *param)
+void detect_uart(char *param)
 {
 	uint32_t i, timeline, distance;
 
 	UART2_RxT_Index = 0;
-	sendchar2(0xE8);
-	sendchar2(0x02);
-	sendchar2(0xbc);
+	sendchar_uart2(0xE8);
+	sendchar_uart2(0x02);
+	sendchar_uart2(0xbc);
 	timeline = SysTick_1ms + 100;
 	printf("\r\nWait %d ms ...", timeline - SysTick_1ms);
 	while(SysTick_1ms < timeline){
@@ -71,18 +70,22 @@ void Detect(char *param)
 			printf("0x%02x ", UART2_RxT_BUF[i%16]);
 		}
 	}
+
+	i = GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_3);
+	printf("\r\nPD3 - %d", i);
+
 }
 
-void AutoDetect(char *param)
+void auto_detect_uart(char *param)
 {
 	uint32_t i, timeline, distance;
 	char buf[10];
 
 	while(1){
 		UART2_RxT_Index = 0;
-		sendchar2(0xE8);
-		sendchar2(0x02);
-		sendchar2(0xbc);
+		sendchar_uart2(0xE8);
+		sendchar_uart2(0x02);
+		sendchar_uart2(0xbc);
 		timeline = SysTick_1ms + 100;
 		printf("\r\nWait %d ms ...", timeline - SysTick_1ms);
 		while(SysTick_1ms < timeline){

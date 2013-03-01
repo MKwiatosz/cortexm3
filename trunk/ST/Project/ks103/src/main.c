@@ -24,7 +24,6 @@
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
-
 /**
   * @brief  Main program.
   * @param  None
@@ -33,18 +32,18 @@
 int main(void)
 {
   /* Configure hardware */
-  HardwareConfigure();
+  hardware_config();
 
   /* Main task */
-  MainTask();
+  main_task();
 
   /* Never run to here ! */
   printf_1("\r\nMake sure all task done !");
   while(1){};
 }
 
+/******************************************************************************/
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *   where the assert_param error has occurred.
@@ -63,73 +62,6 @@ void assert_failed(uint8_t* file, uint32_t line)
   }
 }
 #endif
-
-/**
-  * @brief  Retargets the C library printf function to the USART.
-  * @param  char for printf
-  * @retval None
-  */
-int  sendchar(int ch)
-{
-  /* Write a character to the USART */
-  USART_SendData(USART1, (u8) ch);
-
-  /* Loop until the end of transmission */
-  while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
-  {
-  }
-
-  return ch;
-}
-
-/**
-  * @brief  Retargets the C library printf function to the USART.
-  * @param  None
-  * @retval None
-  */
-int  getkey(void)
-{
-  /* Loop until the end of transmission */
-  while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET)
-  {
-  }
-
-  return ((int)USART_ReceiveData(USART1));
-}
-
-
-/**
-  * @brief  Retargets the C library printf function to the USART.
-  * @param  char for printf
-  * @retval None
-  */
-int  sendchar2(int ch)
-{
-  /* Write a character to the USART */
-  USART_SendData(USART2, (u8) ch);
-
-  /* Loop until the end of transmission */
-  while(USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET)
-  {
-  }
-
-  return ch;
-}
-
-/**
-  * @brief  Retargets the C library printf function to the USART.
-  * @param  None
-  * @retval None
-  */
-int  getkey2(void)
-{
-  /* Loop until the end of transmission */
-  while(USART_GetFlagStatus(USART2, USART_FLAG_RXNE) == RESET)
-  {
-  }
-
-  return ((int)USART_ReceiveData(USART2));
-}
 
 /**
   * @}
