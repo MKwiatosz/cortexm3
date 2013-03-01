@@ -25,16 +25,16 @@ cmd_t basic_cmd_array[] =
   },
 
   {
-    "detect",
-    (cmdHandler)Detect,    
-    "detect distance from ks103",   
+    "detect_uart",
+    (cmdHandler)detect_uart,    
+    "detect distance from ks103 via uart",   
     NULL
   },
 
   {
-    "auto",
-    (cmdHandler)AutoDetect,    
-    "auto detect distance from ks103",   
+    "auto_uart",
+    (cmdHandler)auto_detect_uart,    
+    "auto detect distance from ks103 via uart",   
     NULL
   },
 

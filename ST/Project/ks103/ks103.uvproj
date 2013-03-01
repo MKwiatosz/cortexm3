@@ -478,6 +478,21 @@
               <FileType>1</FileType>
               <FilePath>.\src\lcd.c</FilePath>
             </File>
+            <File>
+              <FileName>uart_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\uart_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\gpio_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>nvic_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\nvic_app.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

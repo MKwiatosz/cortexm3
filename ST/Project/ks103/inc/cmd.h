@@ -13,6 +13,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
+#include "uart_app.h"
 
 /* Exported types ------------------------------------------------------------*/
 typedef void (*cmdHandler)(char *param);
@@ -48,12 +49,13 @@ typedef struct cmd_s {
 #endif
 
 /* Exported macro ------------------------------------------------------------*/
+#define getkey()                       getkey_uart1()
+
 /* External variables --------------------------------------------------------*/
 extern cmd_t basic_cmd_array[];
 
 /* Exported functions ------------------------------------------------------- */
 extern void cmdVersion(char *param);
-extern int  getkey(void);
 extern void cmdHelpInit(void);
 extern void cmdBasicInit(void);
 extern void cmdRegister(cmd_t *bc);

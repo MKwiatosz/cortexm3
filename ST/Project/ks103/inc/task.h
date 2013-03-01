@@ -19,9 +19,9 @@
 /* Exported macro ------------------------------------------------------------*/
 /* External variables --------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-extern void MainTask(void);
-extern void Detect(char *param);
-extern void AutoDetect(char *param);
+extern void main_task(void);
+extern void detect_uart(char *param);
+extern void auto_detect_uart(char *param);
 
 #endif /* __TASK_H */
 /******************* (C) COPYRIGHT 2009 developer.cortex *******END OF FILE****/
